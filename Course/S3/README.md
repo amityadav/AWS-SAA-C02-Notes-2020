@@ -54,6 +54,17 @@
   * Regionally availability
   * Designed with 11x9s durability, like S3
 
+|Storage Class | Designed For | Availability Zone | Min Storage Duration | Min Billable Object size|
+|---|---|---|---|---|
+| Standard  | Frequently accessed data  | >=3  | -  | 128 KB  |
+| Standard-IA  | Long-lived, infrequently accessed data  | >=3  | 30 Days  | 128 KB  |
+| One Zone-IA  | Long-lived, infrequently accessed, non-critical data  | 1  |  30 Days | 128 KB  |
+| Reduced redundancy  | Frequently accessed, non-critical data  | >=3  |   |   |
+|  Intelligent-Tiering | Long-lived data with changing or unknown access patterns  | >=3  | 30 Days  |   |
+| Glacier  | Long-term data archiving with retrieval times ranging from minutes to hours  | >=3  | 90 Days  |   |
+| Glacier Deep Archive  | Long-term data archiving with retrieval times within 12 hours  | >=3  | 180 Days  | -  ||
+
+
 ### [Charges](https://aws.amazon.com/s3/pricing/)
 
 S3 is charged for:
@@ -135,6 +146,31 @@ Only creations and modifications are replicated to the bucket in the other regio
       * Server-side encryption: Here you manage the keys, and Amazon manage the writes
   * Client-side Encryption: You encrypt the data and you upload it encrypted to S3
 
+## S3 Object lock & Glacier Vault Lock
+
+* YS# Object Lock to store Objects using a Write Once, Read Many (WORM) model
+* This helps prevents objects from being deleted or modified for a fixed amount of timeor indefinitely
+* S3 Object loc can be used to meet regulatory compliance requirements
+  * ### Governance Mode - Users can't overwrite or delete an object version or alter its lock settings unless they have special permissions. With governance mode, you protect objects against being deleted by most users, but you can still grant some users permissing to alter trhe retention settings or delete the object if necessary
+  * ### Compliance Mode - A protecte object version can't be overritten or deleted by any user, including the root user. When object is locked in compliance mode, its retention mode can't be changed and its retention period can't be shortened. Compliance mode ensures an object version can't be overwritten or deleted for the duration of the retention period by any user
+* Glacier Valut Lock - S3 Glacier vault lock allows you to deploy and enforce compliance controls for individual S3 glaciers valuts within a vauly lock policy. Once locksed the policy can't be changed
+
+## S3 performance
+* S3 has extremely low latency. You can get the first byte out of S3 within 100-200 milliseconds
+* You can also achieve a high number of request: 3,500 PUT/COPY/POST/DELETE and 5,500 GET/HEAD requests per second per prefix
+* The more prefix we have the more performance we have for S3
+* The performance is impacted if we are using KMS as that it will encrypt & decrypt files when uploading and downloading
+* Use Multipart uploads - Recomended for files over 100 MB & required for files over 5 GB
+* S3 byte-Rance Fetches for downloads
+
+### S3 Select
+* S3 select enables apps to retrieve only a subset of data from an object by using simple SQL expressions, This will help in achieving drastic performance increases
+
+### 3 Diff ways to share S3 bucets across accounts (IMPORTANT)
+* Using Bucket Policies & IAM (applies across thge entire bucket). Programmatic Access Only
+* Using Bucket ACLs & IAM (Individual objects). Programmatic Access Only
+* Cross-accountIAM Roles. programmatic AND Consold access
+
 ## [Amazon Storage](https://aws.amazon.com/products/storage/)
 
 ### [Amazon Storage Gateway](https://aws.amazon.com/storagegateway/)
@@ -189,3 +225,43 @@ On console: Amazon S3 => Your_Bucket => Permissions => Bucket Policy
 ```
 
 _[!!! Read the S3 FAQs before the exam !!!](https://aws.amazon.com/s3/faqs/)_
+
+
+
+## Additional Topics that needs to be looked at
+* AWS Organization
+* DataSync
+    - DataSync automatically encrypts data and accelerates transfer over the WAN. DataSync performs automatic data integrity checks in-transit and at -rest
+    - DataSync seamlessly and securly connects to Amazon S3, EFS, or FSx for windows File Server to copy data and metadata to and from AWS
+    - DataSync agent is deployed as an agent on a server and connects to your NAS or file system to copy data to AWS and write data to AWS
+    - Used to move large amount of data from on-premises to AWS
+    - Used with NFS and SMB compatible file systems
+    - Replication can be done hourly, daily, or weekly
+    
+* CloudFront & CloudFront Signed URL
+    - Edge Location - This is the location where content will be cached. This is a different than an AWS Region/AZ
+     - Distribution - This is the name given the CDN, which consists of collection of edge locations
+     - Origin - This is the origin of all the files that CDN will distribute. This can be either an S3 bucket, an EC2 instance, an Elastic Load Balancer, or Route 53
+     - Web Distribution - Typically used for websites
+     - RTMP - Used for media Streaming
+     - Signed URL v/s Cookies 
+        * A signed cookie or URL is used for providing access to premium content / paid users / authorized users
+        * A signed URL is for individual file
+        * A signed cookie is for multiple files
+        * While creating a signed URl or Cookie we can attach a policy. A policy includes - URL Expiration, IP ranges & Trusted Signers (Which AWS accounts can create signed URL's)
+        * If the origin is EC2 then use CloudFront signed URL and if the origin is S3 then use S3 signed URL
+* Storage Gateway
+    ![Diagram](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/Storage-Gateway-summary-picture.png)
+    ![Storage Gareway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/Use-case-1-More-on-premises-backups-to-the-cloud.png)
+    - Its a Service that connects an on-prem software application with cloud-based storage to provide seamless and secure integration b/w an organization's on-prem IT environment and AWS storage infrastructure. This service enables you ro securely store data to the AWS cloud for scalable and cost effective storage
+     - AWS Storage Gateway's s/w applicance is available for download as a VM inage that can be installed on the host in your dataventer. SG supports VMWare ESXi or Microsoft Hyper-V
+     - Types of Storage Gateway
+        * File Gateway - NFS & SMB - Files are stored as objects in S3 buckets, accessed through a NFS mount point. Once objects are transfered to S3 they can be manages as native S3 onjects
+        ![File Gateway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/File-Gateway-for-on-premises-backups.png)
+        * Volume Gateway - iSCSI
+          * Stored Volume
+          * Cached Volume
+          ![Volume Gateway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/volume-gateway-for-on-premises-backups.png)
+        * Tape Gateway - VTL
+        ![Tape Gateway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/Tape-Gateway-for-on-premises-backups.png)
+* Athena & Macie
