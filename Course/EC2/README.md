@@ -8,8 +8,17 @@ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure,
 
 ### [EC2 Options](https://aws.amazon.com/ec2/pricing/)
 
-* [On demand](https://aws.amazon.com/ec2/pricing/on-demand/): You pay for computing capacity by per hour or per second depending on which instances you run.
-* [Reserved Instance (RI)](https://aws.amazon.com/ec2/pricing/reserved-instances/): Provide a significant discount (up to 75%) compared to On-Demand pricing and provide a capacity reservation when used in a specific Availability Zone. You have to enter a contract.
+* [On demand](https://aws.amazon.com/ec2/pricing/on-demand/): 
+    - Users who wants the low cost & flexibility of Amazon Ec2 without any upfront payment or long-term commitment
+    - Applications with short-term, spiky or unpredictable load that connot be interrupted
+    - Applications being developed or tested for the first time on EC2
+    - You pay for computing capacity by per hour or per second depending on which instances you run.
+* [Reserved Instance (RI)](https://aws.amazon.com/ec2/pricing/reserved-instances/): 
+    - Applications who have predictable loads or steady state
+    - Provide a significant discount (up to 75%) compared to On-Demand pricing and provide a capacity reservation when used in a specific Availability Zone. You have to enter a contract.
+        * Standard Reserved Instances - Payupfront abd long tern contract
+        * Convertible Reserved Instances - Capability to change the attributes of RI as long as the exchange results in the cerations of RI's equal or greater value
+        * Scheduled Reserved Instances - Available to launch within the time windows you reserved
 * [Spot](https://aws.amazon.com/ec2/spot/): Amazon EC2 Spot instances allow you to request spare Amazon EC2 computing capacity for up to 90% off the On-Demand price.
 
   * If you terminate an instance, you will pay for the complete hour.
@@ -21,7 +30,11 @@ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure,
 
 
 
-* [Dedicated Hosts](https://aws.amazon.com/ec2/dedicated-hosts/): Is a physical server with EC2 instance capacity fully dedicated to your use.
+* [Dedicated Hosts](https://aws.amazon.com/ec2/dedicated-hosts/): 
+  - Is a physical server with EC2 instance capacity fully dedicated to your use.
+  - Useful for regulatory requirements
+  - Can be purchased on-demand
+  - Great for licencing which does not support multi-tenancy or cloud deployments
 
 ### [What's EBS](https://aws.amazon.com/ebs/)
 
@@ -43,6 +56,24 @@ Are great for sequential access (processing log files, bigdata work flows as an 
 * Throughput Optimized HDD (st1): Magnetic disk, this can't be a boot volume (root volume).
 * Cold HDD (sc1): Lower cost storage, like file servers, can't be a boot volume.
 * Magnetic (standard): Lowest cost per gigabyte of all EBS. It's bootable and it's from the previous storage generation.
+
+|                                |                                                                                                              | Solid State Drives (SSD)                                                              | Hard Disk Drives (HDD)                                                                                   |                                                                                      |                                                                        |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| Volume Type                    | EBS Provisioned IOPS SSD (io2)                                                                               | EBS Provisioned IOPS SSD (io1)                                                        | EBS General Purpose SSD (gp2)*                                                                           | Throughput Optimized HDD (st1)                                                       | Cold HDD (sc1)                                                         |
+| Short Description              | Highest performance and highest durability SSD volume designed for latency-sensitive transactional workloads | Highest performance SSD volume designed for latency-sensitive transactional workloads | General Purpose SSD volume that balances price performance for a wide variety of transactional workloads | Low cost HDD volume designed for frequently accessed, throughput intensive workloads | Lowest cost HDD volume designed for less frequently accessed workloads |
+| Durability                     | 100.00%                                                                                                      | 99.8% - 99.9% durability                                                              | 99.8% - 99.9% durability                                                                                 | 99.8% - 99.9% durability                                                             | 99.8% - 99.9% durability                                               |
+| Use Cases                      | I/O-intensive NoSQL and relational databases                                                                 | I/O-intensive NoSQL and relational databases                                          | Boot volumes, low-latency interactive apps, dev and test                                                 | Big data, data warehouses, log processing                                            | Colder data requiring fewer scans per day                              |
+| API Name                       | io2                                                                                                          | io1                                                                                   | gp2                                                                                                      | st1                                                                                  | sc1                                                                    |
+| Volume Size                    | 4 GB – 16 TB                                                                                                 | 4 GB - 16 TB                                                                          | 1 GB - 16 TB                                                                                             | 500 GB - 16 TB                                                                       | 500 GB - 16 TB                                                         |
+| Max IOPS**/Volume              | 64,000                                                                                                       | 64,000                                                                                | 16,000                                                                                                   | 500                                                                                  | 250                                                                    |
+| Max Throughput***/Volume       | 1,000 MB/s                                                                                                   | 1,000 MB/s                                                                            | 250 MB/s                                                                                                 | 500 MB/s                                                                             | 250 MB/s                                                               |
+| Max IOPS/Instance              | 160,000                                                                                                      | 160,000                                                                               | 160,000                                                                                                  | 160,000                                                                              | 160,000                                                                |
+| Max Throughput/Instance        | 4,750 MB/s                                                                                                   | 4,750 MB/s                                                                            | 4,750 MB/s                                                                                               | 4,750 MB/s                                                                           | 4,750 MB/s                                                             |
+| Price                          | $0.125/GB-month                                                                                              | $0.125/GB-month                                                                       | $0.10/GB-month                                                                                           | $0.045/GB-month                                                                      | $0.025/GB-month                                                        |
+|                                |                                                                                                              |                                                                                       |                                                                                                          |                                                                                      |                                                                        |
+|                                | $0.065/provisioned IOPS                                                                                      | $0.065/provisioned IOPS                                                               |                                                                                                          |                                                                                      |                                                                        |
+| Dominant Performance Attribute | IOPS and volume durability                                                                                   | IOPS                                                                                  | IOPS                                                                                                     | MB/s                                                                                 | MB/s                                                                   |
+
 
 ### [RAID Arrays using EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/raid-config.html)
 
