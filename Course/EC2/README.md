@@ -38,7 +38,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure,
 
 ### [What's EBS](https://aws.amazon.com/ebs/)
 
-Provides persistent block storage volumes for use with Amazon EC2 instances in the AWS Cloud. EBS is automatically replicated in a specific AZ
+Provides persistent block storage volumes for use with Amazon EC2 instances in the AWS Cloud. EBS is automatically replicated within its AZ
 
 ### [Amazon EBS Volume Types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
 
@@ -75,6 +75,14 @@ Are great for sequential access (processing log files, bigdata work flows as an 
 | Dominant Performance Attribute | IOPS and volume durability                                                                                   | IOPS                                                                                  | IOPS                                                                                                     | MB/s                                                                                 | MB/s                                                                   |
 
 
+
+
+* Termination Protection is turned off byt default
+* On an EBS backed instance, the default action is for the root EBS volumen to be deleted when the instance is terminated
+* EBS Root volume of the default AMI's can be encrypted. You can also use third party tools like Bitlocker to encrypt the root volume or can also be done while creating the AMI's in the AWS console or by using API's
+* Additional volums can be encrypted
+
+
 ### [RAID Arrays using EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/raid-config.html)
 
 As you would do in a bare-metal server, you can also create [RAID](https://en.wikipedia.org/wiki/RAID) arrays within AWS EC2 boxes using EBS volumes.
@@ -92,7 +100,7 @@ Remember also that you can create [snapshots of your RAID arrays](https://aws.am
 
 * Termination protection is turned off by default.
 * The EBS root volume by default is deleted at termination.
-* Default AMI's (provided by Amazon) cannot be encrypted.
+* Default AMI's (provided by Amazon) can be encrypted.
 * Additional volumes can be encrypted.
 
 ## Security groups - Lab
@@ -106,6 +114,8 @@ A security group acts as a virtual firewall for your instance to control inbound
 * All security groups changes are applied immediately.
 * Security groups are stateful. For example, if you allow the request to come in, automatically responses can go out even if you don't have anything on the outbound section of your security group.
 * You can specify only allow rules, not deny rules.
+* You can add multiple security groups to the same EC2 instance
+* You can also attach same security groups to multiple EC2 instances
 
 ## EBS Volumes & Encrypt Root Device Volume - Lab
 
@@ -121,6 +131,19 @@ A security group acts as a virtual firewall for your instance to control inbound
 * Volumes restored from an encrypted snapshot will be encrypted as well.
 * You can share snapshots only if they are not encrypted, these snapshots can be made public.
 
+### [AMI - Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html)
+An Amazon Machine Image (AMI) provides the information required to launch an instance. You must specify an AMI when you launch an instance. You can launch multiple instances from a single AMI when you need multiple instances with the same configuration. You can use different AMIs to launch instances when you need instances with different configurations.
+
+An AMI includes the following:
+
+ - One or more EBS snapshots, or, for instance-store-backed AMIs, a template for the root volume of the instance (for example, an operating system, an application server, and applications).
+
+ - Launch permissions that control which AWS accounts can use the AMI to launch instances.
+
+ - A block device mapping that specifies the volumes to attach to the instance when it's launched.
+
+* ![Using an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/ami_lifecycle.png)
+
 ### [AMI Types](https://aws.amazon.com/amazon-linux-ami/instance-type-matrix/)
 
 * [EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html): Amazon EBS provides durable, block-level storage volumes that you can attach to a running instance
@@ -132,6 +155,36 @@ A security group acts as a virtual firewall for your instance to control inbound
   * You can reboot the instance without losing data.
   * You can not detach Instance Store Volumes.
   * Instance store volumes cannot be kept once the instance is terminated.
+
+ - For EBs Volums: The root device for an instance launched from the AMIis an Amazon EBS volume created from an Amazon EBS snapshot
+ - For Instance Store Volumes: The root device for an instance launched from the AMI is an instnace store volume created from a template stored in Amzaom S3
+
+
+ENI v/s EMA v/s EFA
+
+[ENI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) - Elastic Network Interface - A virtual network card
+n elastic network interface is a logical networking component in a VPC that represents a virtual network card. It can include the following attributes:
+
+ - A primary private IPv4 address from the IPv4 address range of your VPC
+ - One or more secondary private IPv4 addresses from the IPv4 address range of your VPC
+ - One Elastic IP address (IPv4) per private IPv4 address
+ - One public IPv4 address
+ - One or more IPv6 addresses
+ - One or more security groups
+ - A MAC address
+ - A source/destination check flag
+ - A description
+
+Scenarios for network interfaces
+Attaching multiple network interfaces to an instance is useful when you want to:
+ - Create a management network.
+ - Use network and security appliances in your VPC.
+ - Create dual-homed instances with workloads/roles on distinct subnets.
+ - Create a low-budget, high-availability solution.
+
+
+ENA - Enhanced Networkling. Uses single root I/O virtualization (SR-IOV) to provide high-performance networking capabilities on supported instance types
+EFA - Elastic Fabric Adapter - A n/w device that you can attach to your Amazon EC2 instance to accelerate High Performance Computing (HPC) and maching learning applications
 
 ## Elastic Load Balancers
 
