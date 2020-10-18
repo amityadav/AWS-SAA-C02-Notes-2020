@@ -160,7 +160,7 @@ An AMI includes the following:
  - For Instance Store Volumes: The root device for an instance launched from the AMI is an instnace store volume created from a template stored in Amzaom S3
 
 
-ENI v/s EMA v/s EFA
+## <u>ENI v/s EMA v/s EFA</u>
 
 [ENI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) - Elastic Network Interface - A virtual network card
 n elastic network interface is a logical networking component in a VPC that represents a virtual network card. It can include the following attributes:
@@ -183,8 +183,53 @@ Attaching multiple network interfaces to an instance is useful when you want to:
  - Create a low-budget, high-availability solution.
 
 
-ENA - Enhanced Networkling. Uses single root I/O virtualization (SR-IOV) to provide high-performance networking capabilities on supported instance types
-EFA - Elastic Fabric Adapter - A n/w device that you can attach to your Amazon EC2 instance to accelerate High Performance Computing (HPC) and maching learning applications
+[ENA](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html) - Enhanced Networkling. Uses single root I/O virtualization (SR-IOV) to provide high-performance networking capabilities on supported instance types (All current generation instance types support enhanced networking, except for T2 instances.)
+
+You can enable enhanced networking using one of the following mechanisms:
+
+* <u>Elastic Network Adapter (ENA)</u>
+The Elastic Network Adapter (ENA) supports network speeds of up to 100 Gbps for supported instance types.
+
+  - The current generation instances use ENA for enhanced networking, except for C4, D2, and M4 instances smaller than m4.16xlarge.
+
+* <u>Intel 82599 Virtual Function (VF) interface</u>
+  - The Intel 82599 Virtual Function interface supports network speeds of up to 10 Gbps for supported instance types.
+
+   - The following instance types use the Intel 82599 VF interface for enhanced networking: C3, C4, D2, I2, M4 (excluding m4.16xlarge), and R3.
+
+[EFA](https://aws.amazon.com/hpc/efa/) - Elastic Fabric Adapter - A n/w device that you can attach to your Amazon EC2 instance to accelerate High Performance Computing (HPC) and maching learning applications. Elastic Fabric Adapter (EFA) is a network interface for Amazon EC2 instances that enables customers to run applications requiring high levels of inter-node communications at scale on AWS. Its custom-built operating system (OS) bypass hardware interface enhances the performance of inter-instance communications, which is critical to scaling these applications. With EFA, High Performance Computing (HPC) applications using the Message Passing Interface (MPI) and Machine Learning (ML) applications using NVIDIA Collective Communications Library (NCCL) can scale to thousands of CPUs or GPUs. As a result, you get the application performance of on-premises HPC clusters with the on-demand elasticity and flexibility of the AWS cloud.
+
+## Spot Inatances and Spot Fleets
+* Spot Instances save up tp 90% of the cost of on-demand inatances
+* Useful for any type of computing where you don't need persistent storage
+* You can block Spot from terminating by using Spot block
+* A Spot Fleet is a collection of Spot instances and optionally on-demand instances
+
+Spot Instances are userful for
+* Big data & analytics
+* Containerized workloads
+* CI/CD & testing
+* Web Services
+* Image & meria rendering
+* High-performinance computing
+
+Spot Fleet
+* A Spot Fleet is a collection of Spot instances and optionally on-demand instances
+* CapacityOptimized - Spot instance conme from a pool with optimal capacity for the number of instances launching
+* LowestPrice - Spot instance come from the pool with the lowest price. This is the default strategy
+* Diversified - Spot instances are distributed across all pools
+* InstancePoolsToUseCount - Spot instances are distributed across the number of Sport instance pools you specify. The parameter is valid only when used in combination with lowestPrice
+
+## EC2 Hibernate
+When you hibernate an instance, Amazon EC2 signals the operating system to perform hibernation (suspend-to-disk). Hibernation saves the contents from the instance memory (RAM) to your Amazon Elastic Block Store (Amazon EBS) root volume. Amazon EC2 persists the instance's EBS root volume and any attached EBS data volumes. When you start your instance:
+* The EBS root volume is restored to its previous state
+* The RAM contents are reloaded
+* The processes that were previously running on the instance are resumed
+* Previously attached data volumes are reattached and the instance retains its instance ID
+* You can hibernate an instance only if it's enabled for hibernation and it meets the hibernation prerequisites.
+* In order to use Hibernation the root device volume should be encrypted
+* Instances cannot be hibernated more than 60 days
+![Ec2 Hibernation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/hibernation-flow.png)
 
 ## Elastic Load Balancers
 
@@ -320,7 +365,7 @@ Amazon EFS provides scalable file storage for use with Amazon EC2. You can creat
 
 * You need to make sure that the EC2 instance that needs to connect with the EFS volume, is associated with the same security group you have on the EFS volume.
 * You can assign permissions at the file level and at the folder level.
-
+![EFS](https://d1.awsstatic.com/r2018/b/EFS/product-page-diagram-Amazon-EFS-Launch_How-It-Works.cf947858f0ef3557b9fc14077bdf3f65b3f9ff43.png)
 ## [Lambda](https://aws.amazon.com/lambda/)
 
 AWS Lambda lets you run code without provisioning or managing servers. You pay only for the compute time you consume - there is no charge when your code is not running.
