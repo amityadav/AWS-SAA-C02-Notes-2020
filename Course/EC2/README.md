@@ -373,7 +373,6 @@ Amazon EFS provides scalable file storage for use with Amazon EC2. You can creat
 
 
 ## AWS Storage Types - S3, EFS, & EBS
-Updated - 2 months ago
 Lets talk about AWS Storage for a moment.
 
 There have been a number of questions about the different storage types, which are Block storage which are Object storage and where EFS fits into the mix.  Below I hope to shed some light on the important differences so that you can make wise choices between them.
