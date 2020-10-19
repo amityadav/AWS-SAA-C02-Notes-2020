@@ -160,7 +160,7 @@ An AMI includes the following:
  - For Instance Store Volumes: The root device for an instance launched from the AMI is an instnace store volume created from a template stored in Amzaom S3
 
 
-## <u>ENI v/s EMA v/s EFA</u>
+## <u>ENI v/s ENA v/s EFA</u>
 
 [ENI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) - Elastic Network Interface - A virtual network card
 n elastic network interface is a logical networking component in a VPC that represents a virtual network card. It can include the following attributes:
@@ -346,6 +346,7 @@ You can launch or start instances in a placement group, which determines how ins
 * Spread – spreads instances across underlying hardware and can spread in multiple Availability Zones.
   ![](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/placement-group-spread.png)
 * Partition – spreads instances across logical partitions, ensuring that instances in one partition do not share underlying hardware with instances in other partitions.
+
   ![](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/placement-group-partition.png)
 
 Some notes about placement groups:
