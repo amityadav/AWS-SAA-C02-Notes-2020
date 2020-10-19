@@ -341,8 +341,12 @@ Autoscaling group will automatically spread evenly on the number of instances ac
 You can launch or start instances in a placement group, which determines how instances are placed on the underlying hardware. When you create a placement group, you specify one of the following strategies for the group:
 
 * Cluster – clusters instances into a low-latency group in a single Availability Zone.
+
+  ![](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/placement-group-cluster.png)
 * Spread – spreads instances across underlying hardware and can spread in multiple Availability Zones.
+  ![](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/placement-group-spread.png)
 * Partition – spreads instances across logical partitions, ensuring that instances in one partition do not share underlying hardware with instances in other partitions.
+  ![](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/placement-group-partition.png)
 
 Some notes about placement groups:
 
@@ -366,6 +370,39 @@ Amazon EFS provides scalable file storage for use with Amazon EC2. You can creat
 * You need to make sure that the EC2 instance that needs to connect with the EFS volume, is associated with the same security group you have on the EFS volume.
 * You can assign permissions at the file level and at the folder level.
 ![EFS](https://d1.awsstatic.com/r2018/b/EFS/product-page-diagram-Amazon-EFS-Launch_How-It-Works.cf947858f0ef3557b9fc14077bdf3f65b3f9ff43.png)
+
+
+## AWS Storage Types - S3, EFS, & EBS
+Updated - 2 months ago
+Lets talk about AWS Storage for a moment.
+
+There have been a number of questions about the different storage types, which are Block storage which are Object storage and where EFS fits into the mix.  Below I hope to shed some light on the important differences so that you can make wise choices between them.
+
+Storage 
+Ultimately all storage has "block storage" at he lowest level (even SSDs which emulate disk blocks). The terminology used is not as important as understanding the distinctions in how the storage is interacted with. Rather than trying to memorize that this service has this title, or that service has that title, it is more useful to understand how they are used and the advantages and limitations that imposes​.
+
+* S3, files on S3 can only be addressed as objects. You cannot interact with the contents of the object until you have extracted the object from S3  (GET). It cannot be edited in-place, you must extract it, change it, and them put it back to replace the original (PUT). What this comes down to is that here is no user "locking" functionality as might be offered by a 'file system' This is why it is called "Object storage".
+
+* EFS is basically NFS (Network File System) which is an old and still viable Unix technology. As the title implies it is a "File System" and offers more capabilities than "Object Storage" .  The key to these is grades of 'File Locking' which makes it suitable for shared use. This is what makes it suitable for a share NETWORK file system. It is important to note that like Object Stores, you are still restricted to handling the file as a complete object. You can lock it so that you can write back to it, but you are restricted in the extent that you do partial content updates based on blocks. This gets a bit grey as there are ways to do partial updates, but they are limited.
+
+* EBS is closer to locally attached disk whether that be IDE, SAS, SCSI (or it's close cousin iSCSI/Fibre Channel, which is in reality just SCSI over a pipe). With Locally attached disk you have better responsiveness and addressing. This allows you to use File Systems that can address the disk at a block level. This includes part reads, part writes, read ahead, delayed writes, file system maintenance where you swap block under the file, block level cloning, thin provisioning, deduplication etc. As noted above, Block Storage sits underneath both NFS and Object stores, but as a consumer you are abstracted away and cannot make direct use of them.
+
+## [Amazon FSx for Windwos File Server](https://aws.amazon.com/fsx/windows/)
+* Provides a full managed native Microsoft Windows file system so you can move your windows apps that require file storage to AWS. Amazon FSx is built on Windows Server
+* A managed Windows server that runs Windows Server Message Block (SMB) based file services
+* Designed for Windows and Windows applications
+* Support AD users, access control lists, groups & security policies, along with Distributed File System (DFS) namespaces and replication
+* It offers single-AZ and multi-AZ deployment options, fully managed backups, and encryption of data at rest and in transit
+* Amazon FSx file storage is accessible from Windows, Linux, and MacOS compute instances and devices running on AWS or on premises. 
+![FSX for Windows](https://d1.awsstatic.com/r2018/b/FSx-Windows/FSx_Windows_File_Server_How-it-Works.9396055e727c3903de991e7f3052ec295c86f274.png)
+
+## [Amazon FSx for Lustre](https://aws.amazon.com/fsx/lustre/)
+Amazon FSx for Lustre is a fully managed service that provides cost-effective, high-performance storage for compute workloads. Many workloads such as machine learning, high performance computing (HPC), video rendering, and financial simulations depend on compute instances accessing the same set of data through high-performance shared storage.
+Powered by Lustre, the world's most popular high-performance file system, FSx for Lustre offers sub-millisecond latencies, up to hundreds of gigabytes per second of throughput, and millions of IOPS. It provides multiple deployment options and storage types to optimize cost and performance for your workload requirements.
+
+FSx for Lustre file systems can also be linked to Amazon S3 buckets, allowing you to access and process data concurrently from both a high-performance file system and from the S3 API.
+
+
 ## [Lambda](https://aws.amazon.com/lambda/)
 
 AWS Lambda lets you run code without provisioning or managing servers. You pay only for the compute time you consume - there is no charge when your code is not running.
@@ -385,3 +422,36 @@ Lambda is charged as follow:
 * Your functions can't go over 5 minutes in run-time.
 
 _Make sure you have a look at what [CORS](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) is._
+
+
+## [HPC on AWS - Component Services](https://aws.amazon.com/hpc/)
+* Data Management & Transfer
+  - [AWS DataSync](https://aws.amazon.com/datasync/)
+  - [AWS Snowball](https://aws.amazon.com/snowball/)
+  - [AWS Snowmobile](https://aws.amazon.com/snowmobile/)
+  - [AWS DirectConnect](https://aws.amazon.com/directconnect/)
+* Compute & Networking
+  - [Amazon EC2 instances(CPU, CPU, FPGA)](https://aws.amazon.com/ec2/)
+  - [Amazon EC2 spot](https://aws.amazon.com/ec2/spot/)
+  - [AWS Auto scaling](https://aws.amazon.com/autoscaling/)
+  - [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
+  - [Enhanced Networking](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html)
+  - [Elastic Fabric Adapter](https://aws.amazon.com/hpc/efa/)
+  - [AWS VPC](https://aws.amazon.com/vpc/)
+* Storage
+  - [Amazon EBS with provisioned IOPS](https://aws.amazon.com/ebs/)
+  - [Amazon Fsx for Lustre](https://aws.amazon.com/fsx/lustre/)
+  - [Amazon EFS](https://aws.amazon.com/efs/)
+  - [Amazon S3](https://aws.amazon.com/s3/)
+* Automation & Orchestration
+  - [AWS Batch](https://aws.amazon.com/batch/)
+  - [AWS ParallelCliuster](https://aws.amazon.com/hpc/parallelcluster/)
+  - [NICE EnginFrame](https://www.nice-software.com/download/enginframe-on-aws)
+* Visualization
+  - [NICE DCV](https://aws.amazon.com/hpc/dcv/)
+  - [Amazon AppStream 2.0](https://aws.amazon.com/appstream2/)
+* Operation & Management
+  - [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/)
+  - [AWS Budgets](https://aws.amazon.com/aws-cost-management/aws-budgets/)
+* Security & Compliance
+  - [AWS Identity & Access Management](https://aws.amazon.com/iam/)
