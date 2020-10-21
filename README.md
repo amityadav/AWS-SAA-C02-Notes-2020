@@ -64,3 +64,5 @@ _Italics:_ Is used for personal notes or addictions to the course, like tips or 
 If you find mistakes, typos or you think something should be modified, revisited or updated, feel free to open a PR or an issue with a brief explanation of your request.
 
 If something is missing instead, have a look at the [ToDo list](https://github.com/AlessioCasco/AWS-CSA-2019-study-notes/issues/4#issue-431706704) and check if that missing part has been already spotted. If not, feel free to PR it or add a [new checkbox](https://help.github.com/en/articles/about-task-lists#creating-task-lists) on the issue.
+
+[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats)](https://github.com/amityadav/github-readme-stats)
