@@ -34,9 +34,35 @@ We can divide IT systems into transactional (OLTP) and analytical (OLAP). In gen
 
 ### DyanmoDB - No SQL
 
-### RedShift - OLAP
+### RedShift - OLAP - Used for DataWearhouse
 
 ### Elasticache - In Memeory Caching
+  * Redis
+  * Memcached
+
+|Database Type|Use Cases|AWS Service|
+|--- |--- |--- |
+|Relational|Traditional applications, ERP, CRM, e-commerce| Amazon Aurora,  Amazon RDS,  Amazon Redshift|
+|Key-value|High-traffic web apps, e-commerce systems, gaming applications|Amazon DynamoDB|
+|In-memory|Caching, session management, gaming leaderboards, geospatial applications|Amazon ElastiCache for Memcached, Amazon ElastiCache for Redis|
+|Document|Content management, catalogs, user profiles|Amazon DocumentDB (with MongoDB compatibility)|
+|Wide-column|High scale industrial apps for equipment maintenance, fleet management, and route optimization|Amazon Keyspaces (for Apache Cassandra)|
+|Graph|Fraud detection, social networking, recommendation engines|Amazon Neptune|
+|Time series|IoT applications, DevOps, industrial telemetry|Amazon Timestream|
+|Ledger|Systems of record, supply chain, registrations, banking transactions|Amazon Quantum Ledger Database|
+
+## [Use Cases]()
+Internet scale applications
+![](https://d1.awsstatic.com/webteam/category-pages/Databases/category-page-diagram_database_gaming.de2623720c885acfe788a9170db1837129758d8a.png)
+
+Real-time applications
+![](https://d1.awsstatic.com/webteam/category-pages/Databases/category-page-diagram_database_caching.959d5429c58d7a59fa08e3484ff7d43b4881ebdc.png)
+
+Opensource application
+![](https://d1.awsstatic.com/webteam/category-pages/Databases/category-page-diagram_database_open-source.b19513e06bb99e0cf4a9f98b389f3c891ebb2843.png)
+
+Enterprise applications
+![](https://d1.awsstatic.com/webteam/category-pages/Databases/Category-Page-Diagram_Datbases-on-AWS_Enterprise-Applications.fa44910d3054c6b9f6fc5140fb77b0e056dc8df7.png)
 
 ### [Automated Backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html)
 
