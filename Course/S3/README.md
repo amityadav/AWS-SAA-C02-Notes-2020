@@ -264,4 +264,44 @@ _[!!! Read the S3 FAQs before the exam !!!](https://aws.amazon.com/s3/faqs/)_
           ![Volume Gateway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/volume-gateway-for-on-premises-backups.png)
         * Tape Gateway - VTL
         ![Tape Gateway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/Tape-Gateway-for-on-premises-backups.png)
+
+
 * Athena & Macie
+
+## Provisioned Capacity Unit (PCU) 
+* Provisioned Capacity guarantees that your retrieval capacity for Expedited retrievals will be available when you need it. 
+* Each unit of capacity ensures that at least 3 expedited retrievals can be performed every 5 minutes and provides up to 150MB/s of retrieval throughput.
+* Without provisioned capacity, Expedited retrieval requests will be accepted if capacity is available at the time the request is made.
+# Billing
+
+* Some prices vary across Amazon S3 Regions. 
+* Billing prices are based on the location of your bucket. 
+* There is no Data Transfer charge for data transferred within an Amazon S3 Region via a COPY request. 
+* Data transferred via a COPY request between AWS Regions is charged. 
+* There is no Data Transfer charge for data transferred between Amazon EC2 and Amazon S3 within the same region, for example, data transferred within the US East (Northern Virginia) Region. However, data transferred between Amazon EC2 and Amazon S3 across all other regions is charged, for example, data transferred between Amazon EC2 US East (Northern Virginia) and Amazon S3 US West (Northern California). 
+* For S3 on Outposts pricing, please visit the Outposts pricing page.
+
+
+Q:  How will I be charged and billed for my use of Amazon S3?
+---
+* Storage Used - The volume of storage billed in a month is based on the average storage used throughout the month.
+* Network Data Transfer In - This represents the amount of data sent to your Amazon S3 buckets. 
+* Network Data Transfer Out - This charge applies whenever data is read from any of your buckets from a location outside of the given Amazon S3 Region.
+
+Q: How am I charged for using Versioning?
+---
+* Normal Amazon S3 rates apply for every version of an object stored or requested.
+* For example, let’s look at the following scenario to illustrate storage costs when utilizing Versioning (let’s assume the current month is 31 days long):
+
+1) Day 1 of the month: You perform a PUT of 4 GB (4,294,967,296 bytes) on your bucket.
+2) Day 16 of the month: You perform a PUT of 5 GB (5,368,709,120 bytes) within the same bucket using the same key as the original PUT on Day 1.
+
+When analyzing the storage costs of the above operations, please note that the 4 GB object from Day 1 is not deleted from the bucket when the 5 GB object is written on Day 15. Instead, the 4 GB object is preserved as an older version and the 5 GB object becomes the most recently written version of the object within your bucket. At the end of the month:
+
+Total Byte-Hour usage
+[4,294,967,296 bytes x 31 days x (24 hours / day)] + [5,368,709,120 bytes x 16 days x (24 hours / day)] = 5,257,039,970,304 Byte-Hours.
+
+
+Q:  How does S3 Intelligent-Tiering work?
+---
+S3 Intelligent-Tiering works by storing objects in four access tiers: two low latency access tiers optimized for frequent and infrequent access, and two opt-in archive access tiers designed for asynchronous access that are optimized for rare access. Objects uploaded or transitioned to S3 Intelligent-Tiering are automatically stored in the Frequent Access tier. S3 Intelligent-Tiering works by monitoring access patterns and then moving the objects that have not been accessed in 30 consecutive days to the Infrequent Access tier. Once you have activated one or both of the archive access tiers, S3 Intelligent-Tiering will automatically move objects that haven’t been accessed for 90 consecutive days to the Archive Access tier and after 180 consecutive days of no access to the Deep Archive Access tier. If the objects are accessed later, the objects are moved bacck to the Frequent Access Tier. There are no retrieval fees, so you won’t see unexpected increases in storage bills when access patterns change.
