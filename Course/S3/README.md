@@ -304,4 +304,40 @@ Total Byte-Hour usage
 
 Q:  How does S3 Intelligent-Tiering work?
 ---
-S3 Intelligent-Tiering works by storing objects in four access tiers: two low latency access tiers optimized for frequent and infrequent access, and two opt-in archive access tiers designed for asynchronous access that are optimized for rare access. Objects uploaded or transitioned to S3 Intelligent-Tiering are automatically stored in the Frequent Access tier. S3 Intelligent-Tiering works by monitoring access patterns and then moving the objects that have not been accessed in 30 consecutive days to the Infrequent Access tier. Once you have activated one or both of the archive access tiers, S3 Intelligent-Tiering will automatically move objects that haven’t been accessed for 90 consecutive days to the Archive Access tier and after 180 consecutive days of no access to the Deep Archive Access tier. If the objects are accessed later, the objects are moved bacck to the Frequent Access Tier. There are no retrieval fees, so you won’t see unexpected increases in storage bills when access patterns change.
+S3 Intelligent-Tiering works by storing objects in four access tiers: two low latency access tiers optimized for frequent and infrequent access, and two opt-in archive access tiers designed for asynchronous access that are optimized for rare access. Objects uploaded or transitioned to S3 Intelligent-Tiering are automatically stored in the Frequent Access tier. S3 Intelligent-Tiering works by monitoring access patterns and then moving the objects that have not been accessed in 30 consecutive days to the Infrequent Access tier. Once you have activated one or both of the archive access tiers, S3 Intelligent-Tiering will automatically move objects that haven’t been accessed for 90 consecutive days to the Archive Access tier and after 180 consecutive days of no access to the Deep Archive Access tier. If the objects are accessed later, the objects are moved bacck to the Frequent Access Tier. There are no retrieval fees, so one won’t see unexpected increases in storage bills when access patterns change. There is no minimum billable object size in S3 Intelligent-Tiering, but objects smaller than 128KB are not eligible for auto-tiering.
+
+Q:  Is there a minimum duration for S3 Intelligent-Tiering?
+---
+Yes. The S3 Intelligent-Tiering storage class has a minimum storage duration of 30 days, which means that data that is deleted, overwritten, or transitioned to a different S3 Storage Class before 30 days will incur the normal usage charge plus a pro-rated charge for the remainder of the 30-day minimum.
+
+Q:  What are S3 object tags?
+---
+S3 object tags are key-value pairs applied to S3 objects which can be created, updated or deleted at any time during the lifetime of the object. With these, you’ll have the ability to create Identity and Access Management (IAM) policies, setup S3 Lifecycle policies, and customize storage metrics. These object-level tags can then manage transitions between storage classes and expire objects in the background.Up to ten tags can be added to each S3 object.
+
+Q:  What is Storage Class Analysis?
+---
+With Storage Class Analysis, you can analyze storage access patterns and transition the right data to the right storage class. This new S3 feature automatically identifies infrequent access patterns to help you transition storage to S3 Standard-IA. Configure a Storage Class Analysis policy to monitor an entire bucket, prefix, or object tag.
+
+Q:  What is S3 Inventory?
+---
+The S3 Inventory report provides a scheduled alternative to Amazon S3’s synchronous List API. You can configure S3 Inventory to provide a CSV, ORC, or Parquet file output of your objects and their corresponding metadata on a daily or weekly basis for an S3 bucket or prefix. S3 Inventory report files can be encrypted by SSE-S3 or SSE-KMS.
+
+Q:  What is S3 Batch Operations?
+---
+S3 Batch Operations is a feature that you can use to automate the execution, management, and auditing of a specific S3 request or Lambda function across many objects stored in Amazon S3. 
+
+Q:  Why should I use S3 Batch Operations?
+---
+You should use S3 Batch Operations if you want to automate the execution of a single operation (like copying an object, or executing an AWS Lambda function) across many objects. With S3 Batch Operations, you can, with a few clicks in the S3 console or a single API request, make a change to billions of objects without having to write custom application code or run compute clusters for storage management applications. Not only does S3 Batch Operations administer your storage operation across many objects, S3 Batch Operations manages retries, displays progress, delivers notifications, provides a completion report, and sends events to AWS CloudTrail for all operations performed on your target objects. If you are interested in learning more about S3 Batch Operations, go to the Amazon S3 features page.
+
+Q: What is Amazon S3 Storage Lens?
+---
+Amazon S3 Storage Lens provides organization-wide visibility into object storage usage and activity trends, as well as actionable recommendations to improve cost efficiency and apply data protection best practices. Storage Lens offers an interactive dashboard containing a single view of your object storage usage and activity across tens or hundreds of accounts in your organization, with the ability to drill-down to generate insights at the account, bucket, or even prefix level. This includes metrics like bytes, object counts, and requests, as well as metrics detailing S3 feature utilization, such as encrypted object counts and delete marker counts. S3 Storage Lens also delivers contextual recommendations to find ways for you to reduce storage costs and apply best practices on data protection across tens or hundreds of accounts and buckets.
+
+Q: How does S3 Storage Lens work?
+---
+S3 Storage Lens aggregates your storage usage and activity metrics on a daily basis to be visualized in the S3 Storage Lens interactive dashboard, or available as a metrics export in CVS or Parquet file format. A default dashboard is created for you automatically at the account level, and you have the option to create additional custom dashboards scoped to your AWS organization or specific accounts, Regions, or buckets. In configuring your dashboard you can use the default metrics selection, or receive advanced metrics and recommendations for an additional cost. S3 Storage Lens provides recommendations contextually with storage metrics in the dashboard, so you can take action to optimize your storage based on the metrics.
+
+Q: What is the difference between S3 Storage Lens and S3 Storage Class Analysis (SCA)?
+---
+S3 Storage Class Analysis provides recommendations for an optimal storage class by creating object age groups based on object-level access patterns within an individual bucket/prefix/tag for the previous 30-90 days. S3 Storage Lens provides daily organization level recommendations on ways to improve cost efficiency and apply data protection best practices, with additional granular recommendations by account, region, storage class, bucket or prefix.  

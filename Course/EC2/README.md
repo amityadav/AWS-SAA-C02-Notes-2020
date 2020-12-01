@@ -76,7 +76,8 @@ Are great for sequential access (processing log files, bigdata work flows as an 
 
 
 
-
+---
+s
 * Termination Protection is turned off byt default
 * On an EBS backed instance, the default action is for the root EBS volumen to be deleted when the instance is terminated
 * EBS Root volume of the default AMI's can be encrypted. You can also use third party tools like Bitlocker to encrypt the root volume or can also be done while creating the AMI's in the AWS console or by using API's
@@ -198,6 +199,10 @@ The Elastic Network Adapter (ENA) supports network speeds of up to 100 Gbps for 
    - The following instance types use the Intel 82599 VF interface for enhanced networking: C3, C4, D2, I2, M4 (excluding m4.16xlarge), and R3.
 
 [EFA](https://aws.amazon.com/hpc/efa/) - Elastic Fabric Adapter - A n/w device that you can attach to your Amazon EC2 instance to accelerate High Performance Computing (HPC) and maching learning applications. Elastic Fabric Adapter (EFA) is a network interface for Amazon EC2 instances that enables customers to run applications requiring high levels of inter-node communications at scale on AWS. Its custom-built operating system (OS) bypass hardware interface enhances the performance of inter-instance communications, which is critical to scaling these applications. With EFA, High Performance Computing (HPC) applications using the Message Passing Interface (MPI) and Machine Learning (ML) applications using NVIDIA Collective Communications Library (NCCL) can scale to thousands of CPUs or GPUs. As a result, you get the application performance of on-premises HPC clusters with the on-demand elasticity and flexibility of the AWS cloud.
+
+Q: What are the differences between an EFA ENI and an ENA ENI?
+---
+An ENA ENI provides traditional IP networking features necessary to support VPC networking. An EFA ENI provides all the functionality of an ENA ENI, plus hardware support for applications to communicate directly with the EFA ENI without involving the instance kernel (OS-bypass communication) using an extended programming interface. Due to the advanced capabilities of the EFA ENI, EFA ENIs can only be attached at launch or to stopped instances.
 
 ## Spot Inatances and Spot Fleets
 * Spot Instances save up tp 90% of the cost of on-demand inatances
@@ -463,3 +468,187 @@ With AWS WAF, you pay only for what you use. The pricing is based on how many ru
 
 You can deploy AWS WAF on Amazon CloudFront as part of your CDN solution, the Application Load Balancer that fronts your web servers or origin servers running on EC2, or Amazon API Gateway for your APIs.
 ![AWS WAF](https://d1.awsstatic.com/products/WAF/product-page-diagram_AWS-WAF_How-it-Works@2x.452efa12b06cb5c87f07550286a771e20ca430b9.png)
+
+# [AWS Cloud Data Migration Services](https://aws.amazon.com/cloud-data-migration/)
+
+## Hybrid cloud storage
+### [AWS Storage Gateway](https://aws.amazon.com/storagegateway/)
+
+[AWS Storage Gateway](https://aws.amazon.com/storagegateway/) simplifies on-premises adoption of AWS Storage. Storage Gateway lets you seamlessly connect and extend your on-premises applications to AWS Storage. Customers use Storage Gateway to seamlessly replace tape libraries with cloud storage, provide cloud storage-backed file shares, or create a low-latency cache to access data in AWS for on-premises applications. The service provides three different types of gateways – File Gateway, Tape Gateway, and Volume Gateway.
+
+**File Gateway** - presents SMB or NFS file shares for on-premises applications to store files as S3 objects and access them with traditional file interfaces.
+**Tape Gateway** - virtual tape library (VTL) configuration seamlessly integrates with your existing backup software for cost effective tape replacement in Amazon S3 and long term archival in S3 Glacier and S3 Glacier Deep Archive.
+
+**Volume Gateway** - stores or caches block volumes locally, with point-in-time backups as EBS snapshots. These snapshots may be recovered in the cloud.
+
+
+### [AWS Direct Connect](https://aws.amazon.com/directconnect/)
+
+Customers select a Direct Connect dedicated physical connection to accelerate network transfers between their datacenters and AWS datacenters.
+
+[AWS Direct Connect](https://aws.amazon.com/directconnect/) lets you establish a dedicated network connection between your network and one of the AWS Direct Connect locations. Using industry standard 802.1q VLANs, this dedicated connection can be partitioned into multiple virtual interfaces. This enables you to use the same connection to access public resources such as objects stored in Amazon S3 using public IP address space, and private resources such as Amazon EC2 instances running within an Amazon Virtual Private Cloud (VPC) using private IP space, while maintaining network separation between the public and private environments. Virtual interfaces can be reconfigured at any time to meet your changing needs.
+
+Explore our AWS Direct Connect Partner Bundles that help extend on-premises technologies to the cloud. 
+
+---
+## Online data transfer
+### [AWS DataSync](https://aws.amazon.com/datasync/)
+
+[AWS DataSync](https://aws.amazon.com/datasync/) is a data transfer service that makes it easy for you to automate moving data between on-premises storage and Amazon S3, Amazon Elastic File System (Amazon EFS), or Amazon FSx for Windows File Server. DataSync automatically handles many of the tasks related to data transfers that can slow down migrations or burden your IT operations, including running your own instances, handling encryption, managing scripts, network optimization, and data integrity validation. You can use DataSync to transfer data at speeds up to 10 times faster than open-source tools. You can use DataSync to copy data over AWS Direct Connect or internet links to AWS for one-time data migrations, recurring data processing workflows, and automated replication for data protection and recovery.
+
+### [AWS Transfer Family](https://aws.amazon.com/aws-transfer-family/)
+
+The [AWS Transfer Family](https://aws.amazon.com/aws-transfer-family/) provides fully managed support for file transfers directly into and out of Amazon S3. With support for Secure File Transfer Protocol (SFTP), File Transfer Protocol over SSL (FTPS), and File Transfer Protocol (FTP), the AWS Transfer Family helps you seamlessly migrate your file transfer workflows to AWS by integrating with existing authentication systems, and providing DNS routing with Amazon Route 53 so nothing changes for your customers and partners, or their applications. With your data in Amazon S3, you can use it with AWS services for processing, analytics, machine learning, and archiving. Getting started with the AWS Transfer Family is easy; there is no infrastructure to buy and set up.
+
+
+### [Amazon S3 Transfer Acceleration](https://aws.amazon.com/s3/transfer-acceleration/)
+
+[Amazon S3 Transfer Acceleration](https://aws.amazon.com/s3/transfer-acceleration/) makes public internet transfers to Amazon S3 faster. You can maximize your available bandwidth regardless of distance or varying internet weather, and there are no special clients or proprietary network protocols. Simply change the endpoint you use with your S3 bucket and acceleration is automatically applied.
+
+This is ideal for recurring jobs that travel across the globe, such as media uploads, backups, and local data processing tasks that are regularly sent to a central location.
+
+
+### [AWS Snowcone](https://aws.amazon.com/snowcone/)
+
+[AWS Snowcone](https://aws.amazon.com/snowcone/) is the smallest member of the AWS Snow Family of edge computing and data transfer devices. Snowcone is portable, rugged, and secure. You can use Snowcone to collect, process, and move data to AWS online with AWS DataSync. Running applications in disconnected environments and connected edge locations can be challenging because these locations often lack the space, power, and cooling needed for data center IT equipment. AWS Snowcone stores data securely in edge locations, and can run edge computing workloads that use AWS IoT Greengrass or Amazon EC2 instances. Snowcone devices are small and weigh 4.5 lbs. (2.1 kg), so you can carry one in a backpack or fit it in tight spaces for IoT, vehicular, or even drone use cases.
+
+
+### [Amazon Kinesis Data Firehose](https://aws.amazon.com/kinesis/firehose/)
+
+[Amazon Kinesis Data Firehose](https://aws.amazon.com/kinesis/firehose/) Data Firehose is the easiest way to load streaming data into AWS. It can capture and automatically load streaming data into Amazon S3 and Amazon Redshift, enabling near real-time analytics with existing business intelligence tools and dashboards you’re already using today. It is a fully managed service that automatically scales to match the throughput of your data and requires no ongoing administration. It can also batch, compress, and encrypt the data before loading it, minimizing the amount of storage used at the destination and increasing security. You can easily create a Firehose delivery stream from the AWS Management Console, configure it with a few clicks, and start sending data to the stream from hundreds of thousands of data sources to be loaded continuously to AWS – all in just a few minutes.
+
+
+### [APN Partner Products](https://aws.amazon.com/backup-recovery/partner-solutions/)
+
+AWS has partnered with a number of industry vendors on physical gateway appliances that bridge the gap between traditional backup and cloud. Link existing on-premises data to Amazon's cloud to make the move without impacting performance and preserving existing backup catalogs.
+
+Seamlessly integrates into existing infrastructure
+May offer deduplication, compression, encryption or WAN acceleration
+Cache recent backups locally, vault everything to the AWS Cloud
+
+---
+## Offline data transfer
+### [AWS Snowcone](https://aws.amazon.com/snowcone/)
+
+[AWS Snowcone](https://aws.amazon.com/snowcone/) is the smallest member of the AWS Snow Family of edge computing and data transfer devices. Snowcone is portable, rugged, and secure. You can use Snowcone to collect, process, and move data to AWS offline by shipping the device. Running applications in disconnected environments and connected edge locations can be challenging because these locations often lack the space, power, and cooling needed for data center IT equipment. AWS Snowcone stores data securely in edge locations, and can run edge computing workloads that use AWS IoT Greengrass or Amazon EC2 instances. Snowcone devices are small and weigh 4.5 lbs. (2.1 kg), so you can carry one in a backpack or fit it in tight spaces for IoT, vehicular, or even drone use cases.
+
+
+### [AWS Snowball](https://aws.amazon.com/snowball/)
+
+[AWS Snowball](https://aws.amazon.com/snowball/) is a petabyte-scale data transport and edge computing device that comes with on-board storage and compute capabilities and is availble in two options. Snowball Edge Storage Optimized devices provide both block storage and Amazon S3-compatible object storage, and 40 vCPUs. They are well suited for local storage and large scale-data transfer. Snowball Edge Compute Optimized devices provide 52 vCPUs, block and object storage, and an optional GPU for use cases like advanced machine learning and full motion video analysis in disconnected environments. You can use these devices for data collection, machine learning and processing, and storage in environments with intermittent connectivity (like manufacturing, industrial, and transportation) or in extremely remote locations (like military or maritime operations) before shipping them back to AWS. These devices may also be rack mounted and clustered together to build larger temporary installations.
+
+
+### [AWS Snowmobile](https://aws.amazon.com/snowmobile/)
+
+[AWS Snowmobile](https://aws.amazon.com/snowmobile/) is an exabyte-scale data transport solution that uses a secure semi 40-foot shipping container to transfer large amounts of data into and out of AWS. Using Snowmobile addresses common challenges with large-scale data transfers including high network costs, long transfer times, and security concerns. Transferring data with Snowmobile is done through a custom engagement, is fast, secure, and can be as little as one-fifth the cost of high-speed internet.
+
+---
+
+## Unmanaged cloud data migration tools
+AWS also offers easy script or CLI tools to move data from your site into AWS cloud storage.
+
+### [rsync](https://rsync.samba.org/)
+
+Customers use [rsync](https://rsync.samba.org/), an open source tool, along with 3rd party file system tools to copy data directly into S3 buckets.
+
+### [S3 command line interface](https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html)
+
+Customers use the [S3 command line interface](https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html) to write commands to move data directly into S3 buckets.
+
+
+### [S3 Glacier command line interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-using-glacier.html)
+
+Customers use the [S3 Glacier command line interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-using-glacier.html) to move data into S3 Glacier vaults.
+
+---
+
+Q: How are my Amazon EBS encryption keys managed?
+---
+Amazon EBS encryption handles key management for you. Each newly created volume gets a unique 256-bit AES key; Volumes created from the encrypted snapshots share the key. These keys are protected by our own key management infrastructure, which implements strong logical and physical security controls to prevent unauthorized access. Your data and associated keys are encrypted using the industry-standard AES-256 algorithm.
+
+Q: Will I be billed for the IOPS provisioned on a Provisioned IOPS volume when it is disconnected from an instance?
+---
+
+Yes, you will be billed for the IOPS provisioned when it is disconnected from an instance. When a volume is detached, we recommend you consider creating a snapshot and deleting the volume to reduce costs. For more information, see the "Underutilized Amazon EBS Volumes" cost optimization check in Trusted Advisor. This item checks your Amazon Elastic Block Store (Amazon EBS) volume configurations and warns when volumes appear to be underused.
+
+Q: What is AWS multi-attach
+---
+EBS Multi-Attach allows the attachment of a single io1 Provisioned IOPS volume to up to 16 Nitro-based instances in the same Availability Zone. EBS Multi-Attach volumes can be used as a block-level subcomponent of an overall shared storage solution.
+
+Q. How do I load data into a file system?
+---
+You can load data into an Amazon EFS file system from your Amazon EC2 instances or from your on-premises datacenter servers.
+
+Amazon EFS file systems can be mounted on an Amazon EC2 instance, so any data that is accessible to an Amazon EC2 instance can also be read and written to Amazon EFS. To load data that is not currently stored on the Amazon cloud, you can use the same methods you use to transfer files to Amazon EC2 today, such as Secure Copy (SCP).
+
+Amazon EFS file systems can also be mounted on an on-premises server, so any data that is accessible to an on-premises server can be read and written to Amazon EFS using standard Linux tools.
+
+Q. How do I access my file system from outside my VPC?
+---
+Amazon EC2 instances within your VPC can access your file system directly, and Amazon EC2 Classic instances outside your VPC can mount a file system via ClassicLink. On-premises servers can mount your file systems via an AWS Direct Connect connection to your VPC.
+
+Q. How many Amazon EC2 instances can connect to a file system?
+---
+Amazon EFS supports one to thousands of Amazon EC2 instances connecting to a file system concurrently.
+
+
+Q: Which instance types offer NVMe instance storage?
+---
+Today, I3en, I3, C6gd, C5d, C5ad, M6gd, M5d, M5dn, M5ad, R6gd, R5d, R5dn, R5ad, z1d, P3dn, G4dn, and F1, X1, X1e instances offer NVMe instance storage.
+
+Q: What encryption algorithm is used to encrypt Amazon EC2 NVMe instance storage?
+---
+Amazon EC2 NVMe instance storage is encrypted using an XTS-AES-256 block cipher.
+
+Q: Can I disable NVMe instance storage encryption?
+---
+No, NVMe instance storage encryption is always on, and cannot be disabled.
+
+Q: Does Amazon EC2 NVMe instance storage support AWS Key Management Service (KMS)?
+---
+No, disk encryption on NVMe instance storage does not support integration with AWS KMS system. Customers cannot bring in their own keys to use with NVMe instance storage. 
+
+Q: Can I enable hibernation on an existing instance?
+---
+No, you cannot enable hibernation on an existing instance (running or stopped). This needs to be enabled during instance launch.
+
+Q: How long can I keep my instance hibernated?
+---
+Currently keeping an instance hibernated for more than 60 days is not supported. You need to resume the instance and go through Stop and Start (without hibernation) if you wish to keep the instance around for a longer duration.
+
+
+Q: What if my EBS root volume is not large enough to store memory state (RAM) for hibernate?
+---
+To enable hibernation, space is allocated on the root volume to store the instance memory (RAM). Make sure that the root volume is large enough to store the RAM contents and accommodate your expected usage, e.g. OS, applications. If the EBS root volume does not enough space, hibernation will fail and the instance will get shutdown instead.
+
+
+Q. What is VM Import/Export?
+---
+VM Import/Export enables customers to import Virtual Machine (VM) images in order to create Amazon EC2 instances. Customers can also export previously imported EC2 instances to create VMs. Customers can use VM Import/Export to leverage their previous investments in building VMs by migrating their VMs to Amazon EC2.
+
+Capacity Reservations
+---
+On-Demand Capacity Reservation is an EC2 offering that lets you create and manage reserved capacity on Amazon EC2. You can create a Capacity Reservation by choosing an Availability Zone and quantity (number of instances) along with other instance specifications such as instance type and tenancy. Once created, the EC2 capacity is held for you regardless of whether you run the instances or not.
+
+Reserved Instance
+---
+A Reserved Instance (RI) is an EC2 offering that provides you with a significant discount on EC2 usage when you commit to a one-year or three-year term.
+* Standard Reserved Instance - Standard RIs offer a significant discount on EC2 instance usage when you commit to a particular instance family.
+* Convertible Reserved Instance - Convertible RIs offer you the option to change your instance configuration during the term, and still receive a discount on your EC2 usage.
+
+# [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)
+* General Purpose - General purpose instances provide a balance of compute, memory and networking resources, and can be used for a variety of diverse workloads. These instances are ideal for applications that use these resources in equal proportions such as web servers and code repositories. 
+A1 / T4g / T3 / T3a / T2 / M6g / M5 / M5a / M5n / M4
+
+* Compute Optimized - Compute Optimized instances are ideal for compute bound applications that benefit from high performance processors. Instances belonging to this family are well suited for batch processing workloads, media transcoding, high performance web servers, high performance computing (HPC), scientific modeling, dedicated gaming servers and ad server engines, machine learning inference and other compute intensive applications.
+C6g / C5 / C5a / C5n / C4
+
+* Storage Optimized - Storage optimized instances are designed for workloads that require high, sequential read and write access to very large data sets on local storage. They are optimized to deliver tens of thousands of low-latency, random I/O operations per second (IOPS) to applications.<br/>
+I3 /  I3en / D2 / H1
+
+* Accelerated Computing - Accelerated computing instances use hardware accelerators, or co-processors, to perform functions, such as floating point number calculations, graphics processing, or data pattern matching, more efficiently than is possible in software running on CPUs.
+P4 / P3 / P2 / Inf1 / G4 / G3 / F1
+
+* Memory Optimized - Memory optimized instances are designed to deliver fast performance for workloads that process large data sets in memory.
+R6g / R5 / R5a / R5n / R4 / X1e / X1 / High Memory / z1d
+
