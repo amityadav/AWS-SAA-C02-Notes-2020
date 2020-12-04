@@ -117,3 +117,32 @@ You need to create a health check before.
 * Geolocation routing policy: Use when you want to route traffic based on the location of your users.
 * Multivalue answer routing policy: Use when you want Route 53 to respond to DNS queries with up to eight healthy records selected at random.
 * Geoproximity routing policy: Use when you want to route traffic based on the location of your resources and, optionally, shift traffic from resources in one location to resources in another.
+
+A zone apex record (example.com v/s www.example.com) can be pointed to the following services using AWS Route 53 Alias record and using the name of the following services instead of IP address.
+* a load balancer  
+* a website hosted on S3
+* CloudFront distribution
+* AWS Elastic Beantalk
+* Amazon API Gateway
+* Amazon VPC endpoint
+
+
+Q. Can I have a Geo DNS record for a continent and different Geo DNS records for countries within that continent? Or a Geo DNS record for a country and Geo DNS records for states within that country?
+---
+Yes, you can have Geo DNS records for overlapping geographic regions (e.g., a continent and countries within that continent, or a country and states within that country). For each end user’s location, Route 53 will return the most specific Geo DNS record that includes that location. In other words, for a given end user’s location, Route 53 will first return a state record; if no state record is found, Route 53 will return a country record; if no country record is found, Route 53 will return a continent record; and finally, if no continent record is found, Route 53 will return the global record.
+
+Q. What is the difference between Latency Based Routing and Geo DNS?
+---
+Geo DNS bases routing decisions on the geographic location of the requests. In some cases, geography is a good proxy for latency; but there are certainly situations where it is not. LatencyBased Routing utilizes latency measurements between viewer networks and AWS datacenters. These measurements are used to determine which endpoint to direct users toward.
+
+If your goal is to minimize end-user latency, we recommend using Latency Based Routing. If you have compliance, localization requirements, or other use cases that require stable routing from a specific geography to a specific endpoint, we recommend using Geo DNS.
+
+Q. What is Private DNS?
+---
+Private DNS is a Route 53 feature that lets you have authoritative DNS within your VPCs without exposing your DNS records (including the name of the resource and its IP address(es) to the Internet.
+
+Q. What happens if all of my endpoints are unhealthy?
+---
+Route 53 can only fail over to an endpoint that is healthy. If there are no healthy endpoints remaining in a resource record set, Route 53 will behave as if all health checks are passing.
+
+

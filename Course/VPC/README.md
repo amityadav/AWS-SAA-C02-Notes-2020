@@ -16,7 +16,8 @@ Amazon Virtual Private Cloud (Amazon VPC) lets you provision a logically isolate
 * NAT Gateway: A highly available, managed Network Address Translation (NAT) service for your resources in a private subnet to access the Internet.
 * Virtual private gateway: The Amazon VPC side of a VPN connection.
 * Peering Connection: A peering connection enables you to route traffic via private IP addresses between two peered VPCs.
-* VPC Endpoints: Enables private connectivity to services hosted in AWS, from within your VPC without using an Internet Gateway, VPN, Network Address Translation (NAT) devices, or firewall proxies.
+* VPC Endpoints: Enables private connectivity to services hosted in AWS, from within your VPC without using an Internet Gateway, VPN, Network Address Translation (NAT) devices, or firewall proxies. There are two types of VPC endpoint - gateway type & interface type endpoint. Gateway endpoint is only for Amazon S3 and DynamoDB.
+
 * Egress-only Internet Gateway: A stateful gateway to provide egress only access for **IPv6** traffic from the VPC to the Internet.
 
 ![VPC_Diagram](https://docs.aws.amazon.com/vpc/latest/userguide/images/default-vpc-diagram.png)
@@ -78,3 +79,51 @@ VPC Flow Logs is a feature that enables you to capture information about the IP 
 ### [VPC Enpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)
 
 A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
+
+
+Q. What are the connectivity options for my Amazon VPC?
+---
+You may connect your Amazon VPC to:
+
+The internet (via an internet gateway)
+Your corporate data center using an AWS Site-to-Site VPN connection (via the virtual private gateway)
+Both the internet and your corporate data center (utilizing both an internet gateway and a virtual private gateway)
+Other AWS services (via internet gateway, NAT, virtual private gateway, or VPC endpoints)
+Other Amazon VPCs (via VPC peering connections)
+
+Q. How do instances without public IP addresses access the Internet
+ ---
+Instances without public IP addresses can access the Internet in one of two ways:
+Instances without public IP addresses can route their traffic through a NAT gateway or a NAT instance to access the Internet. These instances use the public IP address of the NAT gateway or NAT instance to traverse the Internet. The NAT gateway or NAT instance allows outbound communication but doesn’t allow machines on the Internet to initiate a connection to the privately addressed instances.
+For VPCs with a hardware VPN connection or Direct Connect connection, instances can route their Internet traffic down the virtual private gateway to your existing datacenter. From there, it can access the Internet via your existing egress points and network security/monitoring devices.
+
+Q. Does traffic go over the internet when two instances communicate using public IP addresses?
+ ---
+Traffic between two EC2 instances in the same AWS Region stays within the AWS network, even when it goes over public IP addresses.
+Traffic between EC2 instances in different AWS Regions stays within the AWS network, if there is an Inter-Region VPC Peering connection between the VPCs where the two instances reside.
+Traffic between EC2 instances in different AWS Regions where there is no Inter-Region VPC Peering connection between the VPCs where these instances reside, is not guaranteed to stay within the AWS network.
+
+Q. How large of a VPC can I create?
+---
+Currently, Amazon VPC supports five (5) IP address ranges, one (1) primary and four (4) secondary for IPv4. Each of these ranges can be between /28 (in CIDR notation) and /16 in size. The IP address ranges of your VPC should not overlap with the IP address ranges of your existing network.
+
+For IPv6, the VPC is a fixed size of /56 (in CIDR notation). A VPC can have both IPv4 and IPv6 CIDR blocks associated to it.
+
+Q. Can I change the size of a VPC?
+---
+Yes. You can expand your existing VPC by adding four (4) secondary IPv4 IP ranges (CIDRs) to your VPC. You can shrink your VPC by deleting the secondary CIDR blocks you have added to your VPC. You cannot however change the size of the IPv6 address range of your VPC.
+
+Q. How many subnets can I create per VPC?
+---
+Currently you can create 200 subnets per VPC. If you would like to create more, please submit a case at the support center.
+
+Q. Is there a limit on how large or small a subnet can be?
+---
+The minimum size of a subnet is a /28 (or 14 IP addresses.) for IPv4. Subnets cannot be larger than the VPC in which they are created.
+
+For IPv6, the subnet size is fixed to be a /64. Only one IPv6 CIDR block can be allocated to a subnet.
+
+Q. Can I use all the IP addresses that I assign to a subnet?
+---
+No. Amazon reserves the first four (4) IP addresses and the last one (1) IP address of every subnet for IP networking purposes. 
+

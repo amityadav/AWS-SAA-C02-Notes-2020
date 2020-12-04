@@ -652,3 +652,47 @@ P4 / P3 / P2 / Inf1 / G4 / G3 / F1
 * Memory Optimized - Memory optimized instances are designed to deliver fast performance for workloads that process large data sets in memory.
 R6g / R5 / R5a / R5n / R4 / X1e / X1 / High Memory / z1d
 
+Q: Can EC2 Auto Scaling groups span multiple AWS regions?
+---
+EC2 Auto Scaling groups are regional constructs. They can span Availability Zones, but not AWS regions.
+
+Q: How can I implement changes across multiple instances in an EC2 Auto Scaling group?
+---
+You can use AWS CodeDeploy or CloudFormation to orchestrate code changes to multiple instances in your EC2 Auto Scaling group.
+
+Q: If I have data installed in an EC2 Auto Scaling group, and a new instance is dynamically created later, is the data copied over to the new instances?
+---
+Data is not automatically copied from existing instances to new instances. You can use lifecycle hooks to copy the data, or an Amazon RDS database including replicas.
+
+Q: Which health check type should I select?
+---
+If you are using Elastic Load Balancing (ELB) with your group, you should select an ELB health check. If you’re not using ELB with your group, you should select the EC2 health check.
+
+Q: How do I control which instances Amazon EC2 Auto Scaling terminates when scaling in, and how do I protect data on an instance?
+---
+With each Amazon EC2 Auto Scaling group, you control when Amazon EC2 Auto Scaling adds instances (referred to as scaling out) or remove instances (referred to as scaling in) from your group. You can scale the size of your group manually by attaching and detaching instances, or you can automate the process through the use of a scaling policy. When you have Amazon EC2 Auto Scaling automatically scale in, you must decide which instances Amazon EC2 Auto Scaling should terminate first. You can configure this through the use of a termination policy. You can also use instance protection to prevent Amazon EC2 Auto Scaling from selecting specific instances for termination when scaling in. If you have data on an instance, and you need that data to be persistent even if your instance is scaled in, then you can use a service like S3, RDS, or DynamoDB, to make sure that it is stored off the instance.
+
+Q: If Elastic Load Balancing (ELB) determines that an instance is unhealthy, and moved offline, will the previous requests sent to the failed instance be queued and rerouted to other instances within the group?
+---
+When ELB notices that the instance is unhealthy, it will stop routing requests to it. However, prior to discovering that the instance is unhealthy, some requests to that instance will fail.
+
+
+# Elastic Container Registry
+Q: What is Amazon Elastic Container Registry (ECR)?
+---
+Amazon Elastic Container Registry (ECR) is a fully-managed container registry that makes it easy for developers to share and deploy container images and artifacts. Amazon ECR is integrated with Amazon Elastic Container Service (ECS),  Amazon Elastic Kubernetes Service (EKS), and AWS Lambda, simplifying your development to production workflow. Amazon ECR eliminates the need to operate your own container repositories or worry about scaling the underlying infrastructure. Amazon ECR hosts your images in a highly available and scalable architecture, allowing you to reliably deploy containers for your applications. Integration with AWS Identity and Access Management (IAM) provides resource-level control of each repository that lets you share images across your organization or with anyone in the world.
+
+# Amazon Elastic Container Service
+Amazon Elastic Container Service (Amazon ECS) is a fully managed container orchestration service. ECS is a great choice to run containers for several reasons. First, you can choose to run your ECS clusters using AWS Fargate, which is serverless compute for containers. Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design.
+
+![How Amazon ECS Works](https://d1.awsstatic.com/reInvent/re20-pdp-tier1/Mithril/product-page-diagram_Amazon-ECS@2x.0d872eb6fb782ddc733a27d2bb9db795fed71185.png)
+
+Q: How is Amazon ECS different from AWS Elastic Beanstalk?
+---
+AWS Elastic Beanstalk is an application management platform that helps customers easily deploy and scale web applications and services. It keeps the provisioning of building blocks (e.g., EC2, RDS, Elastic Load Balancing, Auto Scaling, CloudWatch), deployment of applications, and health monitoring abstracted from the user so they can just focus on writing code. You simply specify which container images are to be deployed, the CPU and memory requirements, the port mappings, and the container links.
+
+Elastic Beanstalk will automatically handle all the details such as provisioning an Amazon ECS cluster, balancing load, auto-scaling, monitoring, and placing your containers across your cluster. Elastic Beanstalk is ideal if you want to leverage the benefits of containers but just want the simplicity of deploying applications from development to production by uploading a container image. You can work with Amazon ECS directly if you want more fine-grained control for custom application architectures.
+
+Q: Does Amazon ECS support any other container types?
+---
+No. Docker is the only container platform supported by Amazon ECS at this time.There is EKS (Elastic Kubernetes Service)
