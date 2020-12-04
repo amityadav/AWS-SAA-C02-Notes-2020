@@ -78,7 +78,7 @@ VPC Flow Logs is a feature that enables you to capture information about the IP 
 
 ### [VPC Enpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)
 
-A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
+A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection. The following AWS services support this feature: Amazon Elastic Compute Cloud (EC2), Elastic Load Balancing (ELB), Kinesis Streams, Service Catalog, EC2 Systems Manager, Amazon SNS, and AWS DataSync. Many SaaS solutions support this feature as well.
 
 ![Ip Address Rane in VPC](image.png)
 ![VPC Subnets and AZ](image-2.png)
@@ -186,3 +186,40 @@ Yes. Peering connections can be created with VPCs in different regions. Inter-re
 Q. Can I use AWS Direct Connect or hardware VPN connections to access VPCs I’m peered with?
 ---
 No. “Edge to Edge routing” isn’t supported in Amazon VPC.
+
+Q. Is VPC peering traffic within the region encrypted?
+---
+No. Traffic between instances in peered VPCs remains private and isolated – similar to how traffic between two instances in the same VPC is private and isolated.
+
+Q. Is Inter-Region VPC Peering traffic encrypted?
+---
+Traffic is encrypted using modern AEAD (Authenticated Encryption with Associated Data) algorithms. Key agreement and key management is handled by AWS.
+
+Q. What if my peering connection goes down?
+---
+AWS uses the existing infrastructure of a VPC to create a VPC peering connection; it is neither a gateway nor a VPN connection, and does not rely on a separate piece of physical hardware. There is no single point of failure for communication or a bandwidth bottleneck.
+
+Inter-Region VPC Peering operates on the same horizontally scaled, redundant, and highly available technology that powers VPC today. Inter-Region VPC Peering traffic goes over the AWS backbone that has in-built redundancy and dynamic bandwidth allocation. There is no single point of failure for communication.
+
+If an Inter-Region peering connection does go down, the traffic will not be routed over the internet.
+
+Q. What CloudWatch metrics are available for the interface-based VPC endpoint?
+---
+Currently, no CloudWatch metric is available for the interface-based VPC endpoint.
+
+Q. Who pays the data transfer costs for the traffic going via the interface-based VPC endpoint?
+---
+The concept of data transfer costs is similar to that of data transfer costs for EC2 instances. Since an interface-based VPC endpoint is an ENI in the subnet, data transfer charges depend on the source of the traffic. If the traffic to this interface is coming from a resource across AZ, EC2 cross-AZ data transfer charges apply to the consumer end. Customers in the consumer VPC can use AZ-specific DNS endpoint to make sure the traffic stays within the same AZ if they have provisioned each AZ available in their account.
+
+Q. How many VPCs, subnets, Elastic IP addresses, and internet gateways can I create?
+---
+You can have:
+
+Five Amazon VPCs per AWS account per region
+Two hundred subnets per Amazon VPC
+Five Amazon VPC Elastic IP addresses per AWS account per region
+One internet gateway per Amazon VPC
+
+10.20.12.23/20 - This subnet will have 2**(32-20) = 4096 IP address
+
+10.20.12.23/16 = 2**(32-16) = 65536
