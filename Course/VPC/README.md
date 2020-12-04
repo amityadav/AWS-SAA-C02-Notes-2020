@@ -80,6 +80,18 @@ VPC Flow Logs is a feature that enables you to capture information about the IP 
 
 A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
 
+![Ip Address Rane in VPC](image.png)
+![VPC Subnets and AZ](image-2.png)
+![Typical VPC setup/Config](image-3.png)
+![SG v/s NACL](image-4.png)
+![VPC FlowLogs](image-5.png)
+![AWS VPN Basics](image-6.png)
+![AWS Direct Connect Basics](image-7.png)
+![Befor Transit Gateway-1](image-8.png)
+![Befor Transit Gateway-2](image-9.png)
+![With Transit Gateway-1](image-10.png)
+![With Transit Gateway-1](image-11.png)
+![VPC Endpoints - Gateway](image-12.png)
 
 Q. What are the connectivity options for my Amazon VPC?
 ---
@@ -127,3 +139,50 @@ Q. Can I use all the IP addresses that I assign to a subnet?
 ---
 No. Amazon reserves the first four (4) IP addresses and the last one (1) IP address of every subnet for IP networking purposes. 
 
+
+Q. How is Amazon VPC traffic mirroring different from Amazon VPC flow logs?
+---
+Amazon VPC flow logs allow customers to collect, store, and analyze network flow logs. The information captured in flow logs includes information about allowed and denied traffic, source and destination IP addresses, ports, protocol number, packet and byte counts, and an action (accept or reject). You can use this feature to troubleshoot connectivity and security issues and to make sure that the network access rules are working as expected.
+
+Amazon VPC traffic mirroring, provides deeper insight into network traffic by allowing you to analyze actual traffic content, including payload, and is targeted for use-cases when you need to analyze the actual packets to determine the root cause a performance issue, reverse-engineer a sophisticated network attack, or detect and stop insider abuse or compromised workloads.
+
+
+Q. How many Amazon EC2 instances can I use within a VPC?
+---
+You can run any number of Amazon EC2 instances within a VPC, so long as your VPC is appropriately sized to have an IP address assigned to each instance. You are initially limited to launching 20 Amazon EC2 instances at any one time and a maximum VPC size of /16 (65,536 IPs).
+
+Q: Can I boot an Amazon EC2 instance from an Amazon EBS volume within Amazon VPC?
+---
+Yes, however, an instance launched in a VPC using an Amazon EBS-backed AMI maintains the same IP address when stopped and restarted. This is in contrast to similar instances launched outside a VPC, which get a new IP address. The IP addresses for any stopped instances in a subnet are considered unavailable.
+
+Q. Can I create additional subnets in my default VPC, such as private subnets?
+---
+Yes. To launch into nondefault subnets, you can target your launches using the console or the --subnet option from the CLI, API, or SDK.
+
+Q. What is the IP range of a default VPC?
+---
+The default VPC CIDR is 172.31.0.0/16. Default subnets use /20 CIDRs within the default VPC CIDR.
+
+Q. Can I attach or detach one or more network interfaces to an EC2 instance while it’s running?
+---
+Yes.
+
+Q. Can I have more than two network interfaces attached to my EC2 instance?
+---
+The total number of network interfaces that can be attached to an EC2 instance depends on the instance type. 
+
+Q. Can I attach a network interface in one Availability Zone to an instance in another Availability Zone?
+---
+Network interfaces can only be attached to instances residing in the same Availability Zone.
+
+Q. Can I attach a network interface in one VPC to an instance in another VPC?
+---
+Network interfaces can only be attached to instances in the same VPC as the interface.
+
+Q. Can I create a peering connection to a VPC in a different region?
+---
+Yes. Peering connections can be created with VPCs in different regions. Inter-region VPC peering is available globally in all commercial regions (excluding China).
+
+Q. Can I use AWS Direct Connect or hardware VPN connections to access VPCs I’m peered with?
+---
+No. “Edge to Edge routing” isn’t supported in Amazon VPC.
