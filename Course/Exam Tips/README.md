@@ -312,3 +312,59 @@ ECS Container Agent allows container instances to connect to your cluster. The E
 * ECS agent to connect EC2 instances to your ECS cluster. Linux Only
 * IAM with ECS to restrict access
 * Security groups operate at the instance level, not at the task or container level.
+
+
+###Cloudfront
+
+<ul><li>provides low latency and high data transfer speeds for&nbsp;distribution of static, dynamic web or streaming content to web users</li>
+<li>delivers the content through a worldwide network of data centers called <strong>Edge Locations</strong></li>
+<li>keeps persistent connections with the&nbsp;origin servers so that the&nbsp;files can be fetched from the origin servers as quickly as possible.</li>
+<li>dramatically <strong>reduces the number of network hops</strong> that users’ requests must pass through</li>
+<li>supports <strong>multiple origin server options</strong>, like AWS hosted service <em>for e.g. S3, EC2, ELB</em>&nbsp;or an on premise server, which stores the original, definitive version of the&nbsp;objects</li>
+<li><strong>single distribution can have multiple origins</strong> and&nbsp;Path pattern in a cache behavior determines which requests are routed to the origin</li>
+<li>supports <strong>Web Download</strong>&nbsp;distribution and <strong>RTMP</strong> <strong>Streaming</strong>&nbsp;distribution
+<ul><li>Web distribution supports static, dynamic web content, on demand using progressive download &amp;&nbsp;HLS and live streaming video content</li>
+<li>RTMP supports streaming of media files using Adobe Media Server and the Adobe Real-Time Messaging Protocol (RTMP)&nbsp;<strong><span style="color: #ff0000;">ONLY</span></strong></li>
+</ul></li>
+<li>supports HTTPS using either
+<ul><li><strong>dedicated IP address</strong>, which is expensive as dedicated IP address is assigned to each CloudFront edge location</li>
+<li><strong>Server Name Indication (SNI)</strong>, which is free but supported by modern browsers only with the&nbsp;domain name available in the request header</li>
+</ul></li>
+<li>For E2E HTTPS connection,
+<ul><li><strong>Viewers -&gt; CloudFront</strong> needs either <strong>self signed certificate, or certificate issued by CA or ACM</strong></li>
+<li><strong>CloudFront -&gt; Origin</strong> needs <strong>certificate issued by ACM for ELB and by CA for other origins</strong></li>
+</ul></li>
+<li>&nbsp;Security
+<ul><li><strong>Origin Access Identity</strong>&nbsp;(OAI) can be used to restrict the content from S3 origin to be accessible from CloudFront only</li>
+<li>supports<strong> Geo restriction (Geo-Blocking) to whitelist or blacklist</strong> countries that can access the content</li>
+<li><strong>Signed URLs&nbsp;</strong>
+<ul><li>for RTMP distribution as signed cookies aren’t supported</li>
+<li>to restrict access to individual files, <em>for e.g., an installation download for your application.</em></li>
+<li>users using a client,&nbsp;<em>for e.g. a custom HTTP client,</em> that doesn’t support cookies</li>
+</ul></li>
+<li><strong>Signed Cookies</strong>
+<ul><li>provide access to multiple restricted files, <em>for e.g., video part files in HLS format or all of the files in the subscribers’ area of a website.</em></li>
+<li>don’t want to change the&nbsp;current URLs</li>
+</ul></li>
+<li>integrates with AWS <strong>WAF</strong>, a web application firewall that helps protect web applications from attacks by allowing rules configured based on IP addresses, HTTP headers, and custom URI strings</li>
+</ul></li>
+<li>supports <strong>GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE</strong> to get object &amp; object headers, add, update, and delete objects
+<ul><li><strong>only caches</strong> responses to <strong>GET and HEAD</strong> requests and, optionally, OPTIONS requests</li>
+<li><span style="color: #ff0000;"><strong>does not cache</strong></span> responses to <span style="color: #ff0000;"><strong>PUT, POST, PATCH, DELETE</strong></span> request methods and these requests are proxied back&nbsp;to the origin</li>
+</ul></li>
+<li>object <strong>removal</strong> from cache
+<ul><li>would be removed upon <strong>expiry (TTL)</strong> from the cache, by default 24 hrs</li>
+<li>can be <strong>invalidated</strong> <strong>explicitly</strong>, but has a cost associated, however&nbsp;might continue to see the old version until it expires from those caches</li>
+<li>objects can be <strong>invalidated only for Web distribution</strong></li>
+<li>change object name, <strong>versioning</strong>, to serve different version</li>
+</ul></li>
+<li>supports adding or modifying custom headers before the request is sent to origin which can be used to
+<ul><li><strong>validate</strong> if user is accessing the content from CDN</li>
+<li><strong>identifying CDN</strong> from which the request was forwarded from, in case of multiple CloudFront distribution</li>
+<li>for <strong>viewers not supporting CORS</strong>&nbsp;to return the Access-Control-Allow-Origin header for every request</li>
+</ul></li>
+<li>supports <strong>Partial GET requests</strong> using range header to download object in smaller units&nbsp;improving the efficiency of partial downloads and recovery from partially failed transfers</li>
+<li>supports <strong>compression</strong> to compress and serve compressed files when viewer requests include Accept-Encoding: gzip in the request header</li>
+<li>supports different <strong>price class</strong> to include all regions, to include only least expensive regions and other regions to exclude most expensive regions</li>
+<li>supports <strong>access logs</strong> which&nbsp;contain detailed information about every user request for both web and RTMP distribution</li>
+</ul>

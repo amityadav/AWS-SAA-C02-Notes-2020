@@ -105,6 +105,10 @@ For example, if your domain is example.com and you want it to point to a hostnam
 
 In AWS you have to use ALIAS records to point your root domain to other DNS records such as your ELB.
 
+Amazon Route 53 alias records provide a Route 53–specific extension to DNS functionality. Alias records let you route traffic to selected AWS resources, such as CloudFront distributions and Amazon S3 buckets. They also let you route traffic from one record in a hosted zone to another record.
+
+Unlike a CNAME record, you can create an alias record at the top node of a DNS namespace, also known as the zone apex. For example, if you register the DNS name example.com, the zone apex is example.com. You can't create a CNAME record for example.com, but you can create an alias record for example.com that routes traffic to www.example.com.
+
 ## DNS IN AWS
 
 ### [Routing policies available in AWS](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html)
@@ -144,5 +148,77 @@ Private DNS is a Route 53 feature that lets you have authoritative DNS within yo
 Q. What happens if all of my endpoints are unhealthy?
 ---
 Route 53 can only fail over to an endpoint that is healthy. If there are no healthy endpoints remaining in a resource record set, Route 53 will behave as if all health checks are passing.
+
+
+What does Amazon Route53 provide?
+---
+* A global Content Delivery Network.
+* None of these.
+* **A scalable Domain Name System**
+* An SSH endpoint for Amazon EC2.
+
+Does Amazon Route 53 support NS Records?
+---
+* Yes, it supports Name Service records.
+* No
+* It supports only MX records.
+* **Yes, it supports Name Server records.**
+
+Does Route 53 support MX Records?
+---
+* **Yes**
+* It supports CNAME records, but not MX records.
+* No
+* Only Primary MX records. Secondary MX records are not supported.
+
+Which of the following statements are true about Amazon Route 53 resource records? Choose 2 answers
+---
+* **An Alias record can map one DNS name to another Amazon Route 53 DNS name.**
+* A CNAME record can be created for your zone apex.
+* **An Amazon Route 53 CNAME record can point to any DNS record hosted anywhere.**
+* TTL can be set for an Alias record in Amazon Route 53.
+* An Amazon Route 53 Alias record can point to any DNS record hosted anywhere.
+
+Which statements are true about Amazon Route 53? (Choose 2 answers)
+---
+* Amazon Route 53 is a region-level service
+* **You can register your domain name**
+* **Amazon Route 53 can perform health checks and failovers to a backup site in the even of the primary site failure**
+* Amazon Route 53 only supports Latency-based routing
+
+A customer is hosting their company website on a cluster of web servers that are behind a public-facing load balancer. The customer also uses Amazon Route 53 to manage their public DNS. How should the customer configure the DNS zone apex record to point to the load balancer?
+---
+* Create an A record pointing to the IP address of the load balancer
+* Create a CNAME record pointing to the load balancer DNS name.
+* Create a CNAME record aliased to the load balancer DNS name.
+* **Create an A record aliased to the load balancer DNS name**
+
+A user has configured ELB with three instances. The user wants to achieve High Availability as well as redundancy with ELB. Which of the below mentioned AWS services helps the user achieve this for ELB?
+---
+* **Route 53**
+* AWS Mechanical Turk
+* Auto Scaling
+* AWS EMR
+
+How can the domain’s zone apex for example “myzoneapexdomain com” be pointed towards an Elastic Load Balancer?
+---
+* By using an AAAA record
+* By using an A record
+* By using an Amazon Route 53 CNAME record
+* By using an Amazon Route 53 Alias record
+
+You need to create a simple, holistic check for your system’s general availability and uptime. Your system presents itself as an HTTP-speaking API. What is the simplest tool on AWS to achieve this with?
+---
+* **Route53 Health Checks (Refer link)**
+* CloudWatch Health Checks
+* AWS ELB Health Checks
+* EC2 Health Checks
+
+Your organization’s corporate website must be available on www.acme.com and acme.com. How should you configure Amazon Route 53 to meet this requirement?
+---
+* ***Configure acme.com with an ALIAS record targeting the ELB. www.acme.com with an ALIAS record targeting the ELB.***
+* Configure acme.com with an A record targeting the ELB. www.acme.com with a CNAME record targeting the acme.com record.
+* Configure acme.com with a CNAME record targeting the ELB. www.acme.com with a CNAME record targeting the acme.com record.
+* Configure acme.com using a second ALIAS record with the ELB target. www.acme.com using a PTR record with the acme.com record target.
 
 
