@@ -115,20 +115,6 @@ S3 is charged for:
 Only creations and modifications are replicated to the bucket in the other regions NOT the delete
 * You can't replicate over multiple buckets, the maps are always 1-to-1
 
-## [CloudFront](https://aws.amazon.com/cloudfront/)
-
-### [What's a CDN](https://www.cloudflare.com/learning/cdn/what-is-a-cdn/)
-
-* A content delivery network or content distribution network is a geographically distributed network of proxy servers and their data centres
-
-* Key terminology about CloudFront:
-  * Edge Location: Is the location where the content is cached (separate from AWS AZ's or regions)
-    Be aware that you can also write on edge locations, is not ready only.
-  * Invalidating (erasing) the cache costs money.
-  * Origin: Is the source of the files the CDN will distribute. An origin can be an EC2 instance, an S3 bucket, an Elastic Load Balancer or Route53, you can also have your own origin, it not mandatory that is within AWS.
-  * Distribution: Is the name AWS calls CDN's.
-    * You can Have two types: Web that is for generic web contents and RTMP that is for video streaming
-    * TTL: time to live of the cached object.
 
 ### [S3 Security & Encryption](https://aws.amazon.com/blogs/aws/new-amazon-s3-encryption-security-features/)
 
@@ -171,27 +157,6 @@ Only creations and modifications are replicated to the bucket in the other regio
 * Using Bucket ACLs & IAM (Individual objects). Programmatic Access Only
 * Cross-accountIAM Roles. programmatic AND Consold access
 
-## [Amazon Storage](https://aws.amazon.com/products/storage/)
-
-### [Amazon Storage Gateway](https://aws.amazon.com/storagegateway/)
-
-What's an Amazon Storage Gateway: AWS Storage Gateway connects an on-premises software appliance with cloud-based storage to provide seamless integration with data security features between your on-premises IT environment and the AWS storage infrastructure.
-
-* File Gateway: For flat files, stored directly in S3. You can NFS Mount points
-* VOlume gateway (iSCSI): Block-based storage
-  * Store volume (you keep all your data on prem)
-  * Cached Volumes (you keep only the most recent data on prem)
-Tape Gateway (VTL): Virtual tapes
-
-### [Snowball](https://aws.amazon.com/snowball/)
-
-Import Export is still available and was the first version of snowball, you used to ship your drives to AWS
-
-Snowball is (an appliance) a petabyte-scale data transport solution that uses devices designed to be secure to transfer large amounts of data into and out of the AWS Cloud
-
-Snowball edge: is a 100TB data transfer device with onboard storage-computer capabilities. It's like an AWS DC in a box
-
-Snowmobile: AWS Snowmobile is an Exabyte-scale data transfer service used to move extremely large amounts of data to AWS. A truck full of disks basically.
 
 ## [S3 Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html)
 
@@ -238,33 +203,6 @@ _[!!! Read the S3 FAQs before the exam !!!](https://aws.amazon.com/s3/faqs/)_
     - Used with NFS and SMB compatible file systems
     - Replication can be done hourly, daily, or weekly
     
-* CloudFront & CloudFront Signed URL
-    - Edge Location - This is the location where content will be cached. This is a different than an AWS Region/AZ
-     - Distribution - This is the name given the CDN, which consists of collection of edge locations
-     - Origin - This is the origin of all the files that CDN will distribute. This can be either an S3 bucket, an EC2 instance, an Elastic Load Balancer, or Route 53
-     - Web Distribution - Typically used for websites
-     - RTMP - Used for media Streaming
-     - Signed URL v/s Cookies 
-        * A signed cookie or URL is used for providing access to premium content / paid users / authorized users
-        * A signed URL is for individual file
-        * A signed cookie is for multiple files
-        * While creating a signed URl or Cookie we can attach a policy. A policy includes - URL Expiration, IP ranges & Trusted Signers (Which AWS accounts can create signed URL's)
-        * If the origin is EC2 then use CloudFront signed URL and if the origin is S3 then use S3 signed URL
-* Storage Gateway
-    ![Diagram](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/Storage-Gateway-summary-picture.png)
-    ![Storage Gareway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/Use-case-1-More-on-premises-backups-to-the-cloud.png)
-    - Its a Service that connects an on-prem software application with cloud-based storage to provide seamless and secure integration b/w an organization's on-prem IT environment and AWS storage infrastructure. This service enables you ro securely store data to the AWS cloud for scalable and cost effective storage
-     - AWS Storage Gateway's s/w applicance is available for download as a VM inage that can be installed on the host in your dataventer. SG supports VMWare ESXi or Microsoft Hyper-V
-     - Types of Storage Gateway
-        * File Gateway - NFS & SMB - Files are stored as objects in S3 buckets, accessed through a NFS mount point. Once objects are transfered to S3 they can be manages as native S3 onjects
-        ![File Gateway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/File-Gateway-for-on-premises-backups.png)
-        * Volume Gateway - iSCSI
-          * Stored Volume
-          * Cached Volume
-          ![Volume Gateway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/volume-gateway-for-on-premises-backups.png)
-        * Tape Gateway - VTL
-        ![Tape Gateway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/Tape-Gateway-for-on-premises-backups.png)
-
 
 * Athena & Macie
 
