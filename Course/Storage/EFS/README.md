@@ -13,7 +13,7 @@
 * 1000 file systems per regions is the limit
 * Amazon EFS is designed to burst to allow high throughput levels for periods of time
 * consistent baseline performance of 50 MB/s per TB of Standard class storage, all file systems (regardless of size) can burst to 100 MB/s
-
+* You can use EFS with only LINUX based EC2 instances
 
 ## Use Cases
 * Big Data & analytics
