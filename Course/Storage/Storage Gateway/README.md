@@ -1,4 +1,4 @@
-## [Amazon Storage](https://aws.amazon.com/products/storage/)
+## [Amazon Storage](https://aws.amazon.com/products/storage/)  - Data Transfer
 
 ### [Amazon Storage Gateway](https://aws.amazon.com/storagegateway/)
 
@@ -31,3 +31,9 @@ What's an Amazon Storage Gateway: AWS Storage Gateway connects an on-premises so
 * Tape Gateway (VTL): Virtual tapes
 
 ![Tape Gateway](https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2019/11/23/Tape-Gateway-for-on-premises-backups.png)
+
+## Use Cases
+* Move backups to the cloud
+* Use on-premises file shares backed by cloud storage
+* Low latency access for on-premises applications to cloud
+* Data protection and disaster recovery

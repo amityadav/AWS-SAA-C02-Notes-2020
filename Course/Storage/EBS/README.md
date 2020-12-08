@@ -1,4 +1,4 @@
-# EBS (Elastic Block Store)
+# EBS (Elastic Block Store) - Block Storage
 EBS is an easy to use, high performance **block storage** designed for Amazon EC2.
 
 It offers two variants

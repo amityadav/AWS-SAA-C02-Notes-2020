@@ -1,6 +1,4 @@
-# CHAPTER 3 | S3 Object Storage and CDN
-
-## S3
+## S3 - Object Storage
 
 ### [What's S3](https://aws.amazon.com/s3/)
 
@@ -279,3 +277,18 @@ S3 Storage Lens aggregates your storage usage and activity metrics on a daily ba
 Q: What is the difference between S3 Storage Lens and S3 Storage Class Analysis (SCA)?
 ---
 S3 Storage Class Analysis provides recommendations for an optimal storage class by creating object age groups based on object-level access patterns within an individual bucket/prefix/tag for the previous 30-90 days. S3 Storage Lens provides daily organization level recommendations on ways to improve cost efficiency and apply data protection best practices, with additional granular recommendations by account, region, storage class, bucket or prefix.  
+
+## S3 Storage Lens
+![S3 Storage Lens](https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/s3-storage-lens.d7ce971478c233f5709ab845ed8aac241b8faf25.png)
+
+## S3 Intelligent Tiering
+![S3 Intelligent Tiering](https://d1.awsstatic.com/product-marketing/S3/How_it_works_diagram_Amazon_S3_Intelligent_Tiering.661d3eed1ef6d91ef168e55c3e697d8686d0c93e.png)
+
+## S3 Access Point
+![S3 Access Point](https://d1.awsstatic.com/re19/Westeros/Diagram_S3_Access_Points.fa88c474dc1073aede962aaf3a6af2d6b02be933.png)
+
+## S3 batch Operation
+![S3 batch Operation](https://d1.awsstatic.com/diagrams/product-page-diagrams/Amazon-S3_Batch_Operations_How_it_works_2x.256e945c5cc5c561efde9a86c201b65dc1643959.png)
+
+## S3 Block Public Access
+![S3 Block Public Access](https://d1.awsstatic.com/diagrams/Product-Page-Diagram_S3-Block-Public-Access.689bc6797418103a6de54b0ded0c63b62868a832.png)

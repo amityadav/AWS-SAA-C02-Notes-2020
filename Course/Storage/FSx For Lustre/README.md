@@ -1,4 +1,4 @@
-# Amazon FSx for Lustre
+# Amazon FSx for Lustre - File Storage
 * Fully managed service that provides cost-effective, high-performance, scalable storage for compute workloads
 * workloads as machine learning, high performance computing (HPC), video rendering & financial simulations
 * Amazon FSx provides multiple deployment options to optimize cost

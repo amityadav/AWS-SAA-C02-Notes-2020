@@ -1,4 +1,4 @@
-# EFS (Elastic File System)
+# EFS (Elastic File System) -  - File Storage
 * EFS is a file storage service for Amazon Elastic Cloud Compute instances
 * EFS is easy to use and provies a simple interface that allow you to create and configure file system quickly and easily
 * Fully managed
@@ -68,3 +68,5 @@
     * EKS
     * AWS Lambda
     * AWS SageMaker
+
+![How it works](https://d1.awsstatic.com/r2018/b/EFS/product-page-diagram-Amazon-EFS-Launch_How-It-Works.cf947858f0ef3557b9fc14077bdf3f65b3f9ff43.png)

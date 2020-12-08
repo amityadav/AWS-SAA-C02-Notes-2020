@@ -1,4 +1,4 @@
- # FXs for Lustre
+ # FXs for Windows - File Storage
 * A managed windows server that runs Windows Server Message Block (SMB)-based file services
 * Designed for Windows and Windows applications
 * Supports AD users, access control list, groups and security policies, along with Distributed File System (DFS) namespace and replication
@@ -51,3 +51,5 @@ For compute-intensive and fast processing workloads, like high performance compu
 
 ## Billing
 * You pay only for the resources you use. You are billed hourly for your file systems, based on their deployment type (Single-AZ or Multi-AZ), storage type (SSD or HDD), storage capacity (priced per GB-month), and throughput capacity (priced per MBps-month). You are billed hourly for your backup storage (priced per GB-month).
+
+![How it works](https://d1.awsstatic.com/r2018/b/FSx-Windows/FSx_Windows_File_Server_How-it-Works.9396055e727c3903de991e7f3052ec295c86f274.png)
