@@ -13,10 +13,10 @@
 * FSx for Lustre can be accessed from a Linux instance, by installing the open-source Lustre client and mounting the file system using standard Linux commands
 
 ## FSx for Lustre with S3
-* amazon FSx also integrates seamlessly with S3, making it eas to process cloud data sets with Lustre high performance system
+* amazon FSx also integrates seamlessly with S3, making it easy to process cloud data sets with Lustre high performance system
 * transparently presents S3 objects as files and allows writing changed data back to S3
 * Can be linked with a specified S3 bucket, making the data in S3 accessible to the file system
-* S2 objects name and prefixes will be visible as files and directories
+* S3 objects name and prefixes will be visible as files and directories
 * S3 Objects are lazy loaded by default
     * Objects are only loaded into the file system only when first accessed by the application
     * Amazon FSx for Lustre automatically loads the corresponding objects from S3 when accessed
