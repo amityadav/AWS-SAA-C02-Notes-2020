@@ -34,7 +34,7 @@
 * Supports concurrent access to the same file or directory from thousands of compute instances
 * Provides consistent, sub-millisecond latencies for file operations
 
-FSx for Lustre Availability & Durability
+## FSx for Lustre Availability & Durability
 * On a scratch file system, file servers are not replaced if they fail and data is not replicated.
 * On a persistent file system, if a file server becomes unavailable it is replaced automatically and within minutes.
 * Amazon FSx for Lustre provides a parallel file system, where data is stored across multiple network file servers to maximize performance and reduce bottlenecks, and each server has multiple disks.

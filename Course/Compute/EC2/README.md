@@ -16,7 +16,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure,
 * [Reserved Instance (RI)](https://aws.amazon.com/ec2/pricing/reserved-instances/): 
     - Applications who have predictable loads or steady state
     - Provide a significant discount (up to 75%) compared to On-Demand pricing and provide a capacity reservation when used in a specific Availability Zone. You have to enter a contract.
-        * Standard Reserved Instances - Payupfront abd long tern contract
+        * Standard Reserved Instances - Payupfront and long term contract
         * Convertible Reserved Instances - Capability to change the attributes of RI as long as the exchange results in the cerations of RI's equal or greater value
         * Scheduled Reserved Instances - Available to launch within the time windows you reserved
 * [Spot](https://aws.amazon.com/ec2/spot/): Amazon EC2 Spot instances allow you to request spare Amazon EC2 computing capacity for up to 90% off the On-Demand price.
@@ -35,67 +35,6 @@ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure,
   - Useful for regulatory requirements
   - Can be purchased on-demand
   - Great for licencing which does not support multi-tenancy or cloud deployments
-
-### [What's EBS](https://aws.amazon.com/ebs/)
-
-Provides persistent block storage volumes for use with Amazon EC2 instances in the AWS Cloud. EBS is automatically replicated within its AZ
-
-### [Amazon EBS Volume Types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
-
-#### SSD
-
-SSD are good for random access.
-
-* General Purpose SSD (GP2): General purpose SSD volume that balances price and performance. 3 [IOPS](https://en.wikipedia.org/wiki/IOPS) per GB, up to 10k IOPS
-* Provisioned IOPS SSD (io1): Designed for IO intensive, use it if you need more than 10k IOPS
-
-#### HDD (Magnetic)
-
-Are great for sequential access (processing log files, bigdata work flows as an example).
-
-* Throughput Optimized HDD (st1): Magnetic disk, this can't be a boot volume (root volume).
-* Cold HDD (sc1): Lower cost storage, like file servers, can't be a boot volume.
-* Magnetic (standard): Lowest cost per gigabyte of all EBS. It's bootable and it's from the previous storage generation.
-
-|                                |                                                                                                              | Solid State Drives (SSD)                                                              | Hard Disk Drives (HDD)                                                                                   |                                                                                      |                                                                        |
-|--------------------------------|--------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Volume Type                    | EBS Provisioned IOPS SSD (io2)                                                                               | EBS Provisioned IOPS SSD (io1)                                                        | EBS General Purpose SSD (gp2)*                                                                           | Throughput Optimized HDD (st1)                                                       | Cold HDD (sc1)                                                         |
-| Short Description              | Highest performance and highest durability SSD volume designed for latency-sensitive transactional workloads | Highest performance SSD volume designed for latency-sensitive transactional workloads | General Purpose SSD volume that balances price performance for a wide variety of transactional workloads | Low cost HDD volume designed for frequently accessed, throughput intensive workloads | Lowest cost HDD volume designed for less frequently accessed workloads |
-| Durability                     | 100.00%                                                                                                      | 99.8% - 99.9% durability                                                              | 99.8% - 99.9% durability                                                                                 | 99.8% - 99.9% durability                                                             | 99.8% - 99.9% durability                                               |
-| Use Cases                      | I/O-intensive NoSQL and relational databases                                                                 | I/O-intensive NoSQL and relational databases                                          | Boot volumes, low-latency interactive apps, dev and test                                                 | Big data, data warehouses, log processing                                            | Colder data requiring fewer scans per day                              |
-| API Name                       | io2                                                                                                          | io1                                                                                   | gp2                                                                                                      | st1                                                                                  | sc1                                                                    |
-| Volume Size                    | 4 GB – 16 TB                                                                                                 | 4 GB - 16 TB                                                                          | 1 GB - 16 TB                                                                                             | 500 GB - 16 TB                                                                       | 500 GB - 16 TB                                                         |
-| Max IOPS**/Volume              | 64,000                                                                                                       | 64,000                                                                                | 16,000                                                                                                   | 500                                                                                  | 250                                                                    |
-| Max Throughput***/Volume       | 1,000 MB/s                                                                                                   | 1,000 MB/s                                                                            | 250 MB/s                                                                                                 | 500 MB/s                                                                             | 250 MB/s                                                               |
-| Max IOPS/Instance              | 160,000                                                                                                      | 160,000                                                                               | 160,000                                                                                                  | 160,000                                                                              | 160,000                                                                |
-| Max Throughput/Instance        | 4,750 MB/s                                                                                                   | 4,750 MB/s                                                                            | 4,750 MB/s                                                                                               | 4,750 MB/s                                                                           | 4,750 MB/s                                                             |
-| Price                          | $0.125/GB-month                                                                                              | $0.125/GB-month                                                                       | $0.10/GB-month                                                                                           | $0.045/GB-month                                                                      | $0.025/GB-month                                                        |
-|                                |                                                                                                              |                                                                                       |                                                                                                          |                                                                                      |                                                                        |
-|                                | $0.065/provisioned IOPS                                                                                      | $0.065/provisioned IOPS                                                               |                                                                                                          |                                                                                      |                                                                        |
-| Dominant Performance Attribute | IOPS and volume durability                                                                                   | IOPS                                                                                  | IOPS                                                                                                     | MB/s                                                                                 | MB/s                                                                   |
-
-
-
----
-s
-* Termination Protection is turned off byt default
-* On an EBS backed instance, the default action is for the root EBS volumen to be deleted when the instance is terminated
-* EBS Root volume of the default AMI's can be encrypted. You can also use third party tools like Bitlocker to encrypt the root volume or can also be done while creating the AMI's in the AWS console or by using API's
-* Additional volums can be encrypted
-
-
-### [RAID Arrays using EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/raid-config.html)
-
-As you would do in a bare-metal server, you can also create [RAID](https://en.wikipedia.org/wiki/RAID) arrays within AWS EC2 boxes using EBS volumes.
-
-* Remeber that the RAID available in AWS is only **software**
-* You can have two types of RAID:
-
-  * [RAID 0](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_0) – splits ("stripes") data evenly across two or more disks. When I/O performance is more important than fault tolerance; for example, as in a heavily used database (where data replication is already set up separately). You can use RAID 0 configurations in scenarios where you are using heavy databases with perhaps mirroring and replication.
-  * [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) – consists of an exact copy (or mirror) of a set of data on two or more disks. When fault tolerance is more important than I/O performance; for example, as in a critical application. With RAID 1 you get more data durability in addition to the replication features of the AWS cloud.
-  * RAID 5 and RAID 6 are not recommended for Amazon EBS because the parity write operations of these RAID modes consume some of the IOPS available to your volumes. Depending on the configuration of your RAID array, these RAID modes provide 20-30% fewer usable IOPS than a RAID 0 configuration. Increased cost is a factor with these RAID modes as well; when using identical volume sizes and speeds, a 2-volume RAID 0 array can outperform a 4-volume RAID 6 array that costs twice as much.
-
-Remember also that you can create [snapshots of your RAID arrays](https://aws.amazon.com/premiumsupport/knowledge-center/snapshot-ebs-raid-array/)
 
 ### Launch an EC2 Instance - Lab
 
@@ -147,6 +86,8 @@ An AMI includes the following:
 
 ### [AMI Types](https://aws.amazon.com/amazon-linux-ami/instance-type-matrix/)
 
+An EBS snapshot is a backup of a single EBS volume. ... An AMI image is a backup of an entire EC2 instance. Associated with an AMI image are EBS snapshots. Those EBS snapshots are the backups of the individual EBS volumes attached to the EC2 instance at the time the AMI image was created
+
 * [EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html): Amazon EBS provides durable, block-level storage volumes that you can attach to a running instance
   * EBS takes less time to provision.
   * EBS volumes can be kept once the instance is terminated.
@@ -157,7 +98,7 @@ An AMI includes the following:
   * You can not detach Instance Store Volumes.
   * Instance store volumes cannot be kept once the instance is terminated.
 
- - For EBs Volums: The root device for an instance launched from the AMIis an Amazon EBS volume created from an Amazon EBS snapshot
+ - For EBs Volums: The root device for an instance launched from the AMI is an Amazon EBS volume created from an Amazon EBS snapshot
  - For Instance Store Volumes: The root device for an instance launched from the AMI is an instnace store volume created from a template stored in Amzaom S3
 
 
@@ -215,7 +156,7 @@ Spot Instances are userful for
 * Containerized workloads
 * CI/CD & testing
 * Web Services
-* Image & meria rendering
+* Image & media rendering
 * High-performinance computing
 
 Spot Fleet
@@ -233,6 +174,7 @@ When you hibernate an instance, Amazon EC2 signals the operating system to perfo
 * Previously attached data volumes are reattached and the instance retains its instance ID
 * You can hibernate an instance only if it's enabled for hibernation and it meets the hibernation prerequisites.
 * In order to use Hibernation the root device volume should be encrypted
+* Enable hibernation at launch - You cannot enable hibernation on an existing instance (running or stopped). For more information, see Enabling hibernation for an instance. Purchasing options - This feature is available for On-Demand Instances and Reserved Instances. It is not available for Spot Instances.
 * Instances cannot be hibernated more than 60 days
 ![Ec2 Hibernation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/hibernation-flow.png)
 
@@ -268,7 +210,7 @@ My suggestion is to create 2 instances instead and change the `index.html` in so
 
 ### CloudWatch - Lab
 
-* Standard monitoring is 5 min and * Detailed monitoring is 1 min (you will be charged for it)
+* Standard monitoring is 5 min and detailed monitoring is 1 min (you will be charged for it)
 * Dashboard used to visualize what's happening with your AWS environment.
 * Alarms can be set to notify when a specific threshold is hit
 * Events can be used to perform actions when state changes happen in your AWS resources.
@@ -283,7 +225,7 @@ Remember that:
 ### IAM Roles with EC2 - Lab
 
 * Roles avoid you to store credentials inside EC2 instances in order to communicate with other AWS services
-* Roles can be assigned after an EC2 instance it has been provisioned
+* Roles can be assigned after an EC2 instance has been provisioned
 * Roles are universal, you can use them in any region.
 
 ### [EC2 Instance Metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
@@ -362,22 +304,6 @@ Some notes about placement groups:
 * You can't move an existing instance into a placement group.
 * If the exam refers to placement groups, without mentioning which type, it's most probably talking about the Cluster ones since those are the old ones.
 
-## [EFS](https://aws.amazon.com/efs/)
-
-Amazon EFS provides scalable file storage for use with Amazon EC2. You can create an EFS file system and configure your instances to mount the file system
-
-* Supports NFSv4.
-* You only pay for the storage you use.
-* Scale up to petabytes.
-* Can support thousands of concurrent connections.
-* Data is stored across multiple AZ.
-* Read after write consistency.
-
-* You need to make sure that the EC2 instance that needs to connect with the EFS volume, is associated with the same security group you have on the EFS volume.
-* You can assign permissions at the file level and at the folder level.
-![EFS](https://d1.awsstatic.com/r2018/b/EFS/product-page-diagram-Amazon-EFS-Launch_How-It-Works.cf947858f0ef3557b9fc14077bdf3f65b3f9ff43.png)
-
-
 ## AWS Storage Types - S3, EFS, & EBS
 Lets talk about AWS Storage for a moment.
 
@@ -391,22 +317,6 @@ Ultimately all storage has "block storage" at he lowest level (even SSDs which e
 * EFS is basically NFS (Network File System) which is an old and still viable Unix technology. As the title implies it is a "File System" and offers more capabilities than "Object Storage" .  The key to these is grades of 'File Locking' which makes it suitable for shared use. This is what makes it suitable for a share NETWORK file system. It is important to note that like Object Stores, you are still restricted to handling the file as a complete object. You can lock it so that you can write back to it, but you are restricted in the extent that you do partial content updates based on blocks. This gets a bit grey as there are ways to do partial updates, but they are limited.
 
 * EBS is closer to locally attached disk whether that be IDE, SAS, SCSI (or it's close cousin iSCSI/Fibre Channel, which is in reality just SCSI over a pipe). With Locally attached disk you have better responsiveness and addressing. This allows you to use File Systems that can address the disk at a block level. This includes part reads, part writes, read ahead, delayed writes, file system maintenance where you swap block under the file, block level cloning, thin provisioning, deduplication etc. As noted above, Block Storage sits underneath both NFS and Object stores, but as a consumer you are abstracted away and cannot make direct use of them.
-
-## [Amazon FSx for Windwos File Server](https://aws.amazon.com/fsx/windows/)
-* Provides a full managed native Microsoft Windows file system so you can move your windows apps that require file storage to AWS. Amazon FSx is built on Windows Server
-* A managed Windows server that runs Windows Server Message Block (SMB) based file services
-* Designed for Windows and Windows applications
-* Support AD users, access control lists, groups & security policies, along with Distributed File System (DFS) namespaces and replication
-* It offers single-AZ and multi-AZ deployment options, fully managed backups, and encryption of data at rest and in transit
-* Amazon FSx file storage is accessible from Windows, Linux, and MacOS compute instances and devices running on AWS or on premises. 
-![FSX for Windows](https://d1.awsstatic.com/r2018/b/FSx-Windows/FSx_Windows_File_Server_How-it-Works.9396055e727c3903de991e7f3052ec295c86f274.png)
-
-## [Amazon FSx for Lustre](https://aws.amazon.com/fsx/lustre/)
-Amazon FSx for Lustre is a fully managed service that provides cost-effective, high-performance storage for compute workloads. Many workloads such as machine learning, high performance computing (HPC), video rendering, and financial simulations depend on compute instances accessing the same set of data through high-performance shared storage.
-Powered by Lustre, the world's most popular high-performance file system, FSx for Lustre offers sub-millisecond latencies, up to hundreds of gigabytes per second of throughput, and millions of IOPS. It provides multiple deployment options and storage types to optimize cost and performance for your workload requirements.
-
-FSx for Lustre file systems can also be linked to Amazon S3 buckets, allowing you to access and process data concurrently from both a high-performance file system and from the S3 API.
-
 
 ## [Lambda](https://aws.amazon.com/lambda/)
 
