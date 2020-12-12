@@ -62,7 +62,7 @@
 | Glacier  | Long-term data archiving with retrieval times ranging from minutes to hours  | >=3  | 90 Days  |   |
 | Glacier Deep Archive  | Long-term data archiving with retrieval times within 12 hours  | >=3  | 180 Days  | -  ||
 
-
+![](https://docs.aws.amazon.com/AmazonS3/latest/dev/images/lifecycle-transitions-v2.png)
 ### [Charges](https://aws.amazon.com/s3/pricing/)
 
 S3 is charged for:

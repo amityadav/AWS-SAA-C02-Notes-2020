@@ -138,7 +138,10 @@ Creating a management n/w
     * Ensure that instances in your subnet have a globally unique IP address (public IPv4 address, Elastic IP address, or IPv6 address).
     * Ensure that your network access control lists and security group rules allow the relevant traffic to flow to and from your instance.
 
-## Egress-only internet gateways
+## Egress-only internet gateways for IPV6
+* IPv6 do not have public/private concepts as IPv4 so Amazon created Egress-only IGW for IPv6
+
+![Egress-only internet gateways for IPV6](egress_igw.png)
 * An egress-only internet gateway is a horizontally scaled, redundant, and highly available VPC component that allows outbound communication over IPv6 from instances in your VPC to the internet, and prevents the internet from initiating an IPv6 connection with your instances
 * An egress-only internet gateway is stateful: it forwards traffic from the instances in the subnet to the internet or other AWS services, and then sends the response back to the instances
 
@@ -172,6 +175,8 @@ Creating a management n/w
 
 ![SG v/s NACL](image-4.png)
 
+## Bastion Host v/s AWS Session Manager (ASM)
+![Bastion Host v/s AWS Session Manager](asm.png)
 ## VPC Flow logs
 
 * VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in the VPC and can help in monitoring the traffic or troubleshooting any connectivity issues
@@ -190,7 +195,13 @@ Security within a VPC is provided through
 ## VPC Peering
 * A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them privately
 * You can peer one VPC to another VPC using private IP subnets
-* You can peer VPC's with others AWS accounts as well as with other VPC's in the same account.
+* You can peer VPC's with others AWS accounts as well as with other VPC's in the same account
+* Full private IP connectivity between two VPC's
+* Can peer VPCs across regions
+* VPCs can be in different accounts
+* VPC CIDR ranges must not overlap
+
+![SG v/s NACL](vpc-peering.png)
 
 ### How to VPC Peering
 
