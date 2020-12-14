@@ -314,7 +314,7 @@ ECS Container Agent allows container instances to connect to your cluster. The E
 * Security groups operate at the instance level, not at the task or container level.
 
 
-###Cloudfront
+### Cloudfront
 
 <ul><li>provides low latency and high data transfer speeds for&nbsp;distribution of static, dynamic web or streaming content to web users</li>
 <li>delivers the content through a worldwide network of data centers called <strong>Edge Locations</strong></li>
