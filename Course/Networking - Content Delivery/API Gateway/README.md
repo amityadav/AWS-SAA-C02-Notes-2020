@@ -34,7 +34,15 @@
 * Amazon API Gateway provides throttling at multiple levels including global and by service call. Throttling limits can be set for standard rates and bursts. For example, API owners can set a rate limit of 1,000 requests per second for a specific method in their REST APIs, and also configure Amazon API Gateway to handle a burst of 2,000 requests per second for a few seconds. Amazon API Gateway tracks the number of requests per second. Any requests over the limit will receive a 429 HTTP response
 * Throttling ensures that API traffic is controlled to help your backend services maintain performance and availability
 * Throttling rate limits can be set at the method level
-* How are throttling rules applied - First, API Gateway checks against your AWS account limit. If the traffic is below the set account limit, API Gateway checks the limit you have set on a stage or method. If the traffic is below the stage limit, then API Gateway applies the usage plans limits you set on a per-API key basis.
+* How are throttling rules applied - Amazon API Gateway provides two basic types of throttling-related settings:
+    * Server-side throttling limits are applied across all clients. These limit settings exist to prevent your API—and your account—from being overwhelmed by too many requests.
+    * Per-client throttling limits are applied to clients that use API keys associated with your usage policy as client identifier.
+    
+    API Gateway throttling-related settings are applied in the following order:
+    * Per-client per-method throttling limits that you set for an API stage in a usage plan
+    * Per-client throttling limits that you set in a usage plan
+    * Default per-method limits and individual per-method limits that you set in API stage settings
+    * Account-level throttling per Region
 
 ![](https://d1.awsstatic.com/serverless/New-API-GW-Diagram.c9fc9835d2a9aa00ef90d0ddc4c6402a2536de0d.png)
 
