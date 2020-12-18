@@ -9,6 +9,25 @@
 * AWS Lambda functions can be configured to run up to 15 minutes per execution. You can set the timeout to any value between 1 second and 15 minutes
 * You can automate your serverless application’s release process using AWS CodePipeline and AWS CodeDeploy. CodePipeline is a continuous delivery service that enables you to model, visualize and automate the steps required to release your serverless application. CodeDeploy provides a deployment automation engine for your Lambda-based applications
 * You can use AWS Step Functions to coordinate a series of AWS Lambda functions in a specific order
+* List of services that invoke Lambda functions synchronously:
+    * Elastic Load Balancing (Application Load Balancer)
+    * Amazon Cognito
+    * Amazon Lex
+    * Amazon Alexa
+    * Amazon API Gateway
+    * Amazon CloudFront (Lambda@Edge)
+    * Amazon Kinesis Data Firehose
+* List of services that invoke Lambda functions asynchronously:
+    * Amazon Simple Storage Service
+    * Amazon Simple Notification Service
+    * Amazon Simple Email Service
+    * AWS CloudFormation
+    * Amazon CloudWatch Logs
+    * Amazon CloudWatch Events
+    * AWS CodeCommit
+    * AWS Config
+
+![](https://d2908q01vomqb2.cloudfront.net/fc074d501302eb2b93e2554793fcaf50b3bf7291/2019/06/27/Screen-Shot-2019-06-27-at-2.23.51-PM-1024x510.png)
 
 ## Scalability and availability
 * Lambda provides easy scaling and high availability to thcode without additional effort on your part.

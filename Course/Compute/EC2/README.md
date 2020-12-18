@@ -168,6 +168,7 @@ Spot Fleet
 * Diversified - Spot instances are distributed across all pools
 * InstancePoolsToUseCount - Spot instances are distributed across the number of Sport instance pools you specify. The parameter is valid only when used in combination with lowestPrice
 
+![](https://img-a.udemycdn.com/redactor/raw/2020-09-07_04-07-18-0a79143a5de5a629559613790d0cd9bd.png?gv-audRRe2F7exc1l_FSCWD99SYLMtUetZAN4WDM6rCtgEDfRXLJJDCuFs4qsrsIWMiwdchEg6yL9rrOiyNBmaxCSPtx288wjUn8HLcBibBcMML8tLfP4-jHsrn1KBWut_adlYN71ZjsBT-xYgXz9fwRQzbIQW08Frwzz_t9TnxpWcRz)
 ## EC2 Hibernate
 When you hibernate an instance, Amazon EC2 signals the operating system to perform hibernation (suspend-to-disk). Hibernation saves the contents from the instance memory (RAM) to your Amazon Elastic Block Store (Amazon EBS) root volume. Amazon EC2 persists the instance's EBS root volume and any attached EBS data volumes. When you start your instance:
 * The EBS root volume is restored to its previous state
