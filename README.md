@@ -1,68 +1,21 @@
-# [AWS Certified Solution Architect - Associate](https://aws.amazon.com/training/path-architecting/) 2019 Exam Notes
+# [AWS Certified Solution Architect - Associate](https://aws.amazon.com/training/path-architecting/) Notes 2020
 
-![License](https://img.shields.io/github/license/AlessioCasco/AWS-CSA-2019-study-notes.svg)
+![License](https://img.shields.io/github/license/amityadav/Solution-Architect-Associate-Notes-2020?style=plastic) ![Last_Commit](https://img.shields.io/github/last-commit/amityadav/Solution-Architect-Associate-Notes-2020?style=plastic)
 
-![Course_year](https://img.shields.io/badge/Course%20Year-2019-brightgreen.svg)
-![Last_Commit](https://img.shields.io/github/last-commit/AlessioCasco/AWS-CSA-2019-study-notes.svg)
+---
+These are the notes that i created whilke preparing for my SAA-C02 exam. These notes are a combination of multiple sources
+* [Acloud Guru Udemy course](https://www.udemy.com/course/aws-certified-solutions-architect-associate)
+* [Tutorialsdojo](https://tutorialsdojo.com)
+* [Jitendra Patil Blog](https://jayendrapatil.com)
+* Some of the screen shots i took from AWS Reinvent Youtube videos
 
-================
+---
+## My Certification Path
 
-This is my collection of notes from the
-[A Cloud Guru | AWS Certified Solutions Architect - Associate - 2018](https://acloud.guru/learn/aws-certified-solutions-architect-associate-2018) course.
-It can be used also for the
-_[Udemy | AWS Certified Solutions Architect - Associate 2019](https://www.udemy.com/aws-certified-solutions-architect-associate/) one, since they use the same contents made by the [A cloud Guru](https://acloud.guru/) team._
+* I started with [Acloud Guru's Udemy course](https://www.udemy.com/course/aws-certified-solutions-architect-associate) - This gave me a good start and helped me understand basic concepts. The course itself is sufficient if you want to know about various AWS cloud constructs and fundamentals. But what i found is that this course itself will not be sufficient for you to pass the exam.
+* The next thing i did was to start reading FAQ's for various AWS services (S3, EC2, CloudFront etc.), that gave me a lot of insights on these services and how do they integrate with other services, billing, performance, limitations etc. **This is very important as you will gain lot of insights which will definitely help you in the exam as you can relate to the scenarios and answer correctly.**
+* Next steps or i should say in parallel to reading FAQ's i started watching AWS Reinvent videos from 2018-2019 which gave me further insights for these individual AWS services. Generally these videos are divided into level (100 - basic, 200, 300 etc.) so you cna start with basic level and move on to the deeper dive sessions. These videos helped me understand how these services are implemented in real world scenarios which helped a lot in my exam.
+* Lastly i purchased questions on Udemy from [tutorialsdojo.com](tutorialsdojo.com) - [AWS Certified Solutions Architect Associate Practice Test](https://www.udemy.com/share/102DhfAEIfeF9QRHQ=/) this was very very helpful as the level of these questions are higher than what you will see in the real certification exam. You should definitely look at this. 
 
-================
-
-## Updates
-
-\- Update 4 April 2019 -
-
-* acloud.guru [just updated](https://info.acloud.guru/resources/whats-new-april-2019) the CSA course.
-* From a quick look it seems they put all the Exam Tips they collected in previous months within the relative sections of the course and now Lambda has its own section, is not anymore within the EC2 one.
-
-\- Update 17 April 2019 -
-
-* Added the md's for the [Exam Readiness Training](https://www.aws.training/learningobject/curriculum?id=20685)
-* Reorganized the structure of the repo.
-
-================
-
-## What it is
-
-The A cloud Guru course is huge and in order to explain to you the basic concepts, it has sometimes to give you pieces of information that are not required to be known in order to pass the exam. So my intent here is to save in one place everything the exam requires you to know without the other stuff.
-
-## What it is not
-
-This is not a substitution of the course, you MUST go through the course to be able to pass the exam, it's just a place where you can revise and have all the notions in one single location.
-
-## My study path
-
-* Watched one chapter at the time and revised the noted for stuff I could not remember.
-* Did the final exam and based on wrong answers, went back to the notes to revise the concepts not known.
-* Purchased the [AWS Certified Solutions Architect Associate Practice Exams by Jon Bonso](https://www.udemy.com/aws-certified-solutions-architect-associate-amazon-practice-exams) but personally found not very helpful and sometimes misleading. Some questions are very different from the exam and sometimes wrong questions can be actually true.
-* One week before the exam:
-  * Took the [Exam Readiness Training](https://www.aws.training/learningobject/curriculum?id=20685), this is a good recap and a must do IMHO, it's 2 hours long, free and it gives you also good pieces of information about how to think and not be tricked by the exam. You can find the md's in the root of the repo
-  * If you have never taken an AWS exam I suggest to [take a Practice Exam](https://www.aws.training/certification?src=cert-prep), this will help you familiarize and see how the course will look like. This costs **20$**
-  * Use the [acloud.guru Disussions](https://acloud.guru/forums/aws-certified-solutions-architect-associate-2019/recent?p=1) and check all posts about exam feedbacks. Study everything is mentioned there that you are not comfortable with.
-  * Do as many tests as you can and revise what you don't know.
-
-## AWS Resources
-
-* [AWS Certified Solutions Architect Associate page](https://aws.amazon.com/certification/certified-solutions-architect-associate/)
-* [AWS well architected page](https://aws.amazon.com/architecture/well-architected/): make sure you read the whitepaper before taking the exam.
-* [Exam_Guide_v1.5.2](https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS_Certified_Solutions_Architect_Associate_Feb_2018_%20Exam_Guide_v1.5.2.pdf)
-* [Exam Sample Questions](https://d1.awsstatic.com/training-and-certification/docs/AWS_Certified_Solutions_Architect_Associate_Sample_Questions.pdf)
-* [Book your exam](https://www.aws.training/Certification)
-
-## Meaning of some emphasis used in the .md files
-
-_Italics:_ Is used for personal notes or addictions to the course, like tips or useful notes about the subject.
-
-## Contributions 🙏
-
-If you find mistakes, typos or you think something should be modified, revisited or updated, feel free to open a PR or an issue with a brief explanation of your request.
-
-If something is missing instead, have a look at the [ToDo list](https://github.com/AlessioCasco/AWS-CSA-2019-study-notes/issues/4#issue-431706704) and check if that missing part has been already spotted. If not, feel free to PR it or add a [new checkbox](https://help.github.com/en/articles/about-task-lists#creating-task-lists) on the issue.
-
+---
 <img align="left" src="https://github-readme-stats.vercel.app/api?username=amityadav&show_icons=true" alt="amit's GitHub Stats">
