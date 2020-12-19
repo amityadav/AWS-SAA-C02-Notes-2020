@@ -1,4 +1,4 @@
-# CHAPTER 2 | 10K Foot Overview
+# 10,000 Foot View
 
 Thinks you will need to know to pass the exam:
 
